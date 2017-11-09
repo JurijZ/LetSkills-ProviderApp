@@ -1,0 +1,189 @@
+@{
+    ViewData["Title"] = "Front Page";
+}
+
+<style>
+    .btn-xlarge {
+        padding: 18px 28px;
+        font-size: 25px;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        text-align: center;
+        display: inline-block;
+        background: #ff9900; /**/
+    }
+
+    .btn1:hover {
+        background: #3cb0fd;
+        background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+        background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+        text-decoration: none;
+    }    
+    
+    .boxCenterNumber {
+        height: 120px;
+        width: 200px;
+        border-radius: 5%;
+        background-color: whitesmoke;
+        border: 2px solid black;
+        font-size: 25px;
+        text-align: center;
+        padding: 0 20px;
+        display: flex;
+        justify-content: center; /* align horizontal */
+        align-items: center; /* align vertical */
+    }
+
+    .title-background {
+        background-color: #1e94d4;
+    }
+
+    .title-colour {
+        color: #ffffff;
+    }
+
+    .footer-background {
+        background-color: #2980b9;
+    }
+
+    .footer-colour {
+        color: #ffffff;
+    }
+
+    .howitworks {
+        padding: 10px;
+        border: 5px green;
+        margin-top: 20px;
+        background-color: #99ff99;
+    }
+
+    #wrap {
+        /*margin-top: 20vh;
+        margin-bottom: 20vh;*/
+        padding-top: 20vh;
+        padding-bottom: 20vh;
+    }
+
+    #content {
+        min-height: calc(100vh - 40px);
+    }
+
+    #footer {
+        height: 20px;
+        background: #222;
+        color: white;
+    }
+
+    .fsize {
+        font-size: 20px;
+    }
+
+    .body-background {
+        background-image: url('../dist/Background.png');
+        height: 400px;
+    }
+
+    .register {
+        display: inline-block;
+        float: left;
+    }
+    
+
+</style>
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1 title-background">
+        <div class="col-md-6 text-left">
+            <h2 class="title-colour">Let Skills</h2>
+        </div>
+        <div class="col-md-6 text-right">
+            <h2>
+                <input type="button"
+                       class="btn btn-warning"
+                       value="Register Today"
+                       onclick="@("window.location.href='http://localhost:5000/Account/Register'");">
+            </h2>
+        </div>
+    </div>
+</div>
+
+<div >
+    <div class="row" >
+        <div class="col-md-10 col-md-offset-1 text-center">
+            <div class="row">
+                <div class="col-md-2">
+
+                </div>
+                <div class="col-md-8" id="wrap">
+                    <div class="col-md-6 text-center">
+
+                        @*<input type="button"
+                               class="btn btn-warning btn-xlarge"
+                               value="Advertiser"
+                               onclick="@("window.location.href='" + @Url.Action("Index", "Client") + "'");">*@
+
+                        <div class="fsize">
+                            Advertise work and find the right person for you.
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 text-center">
+
+                        <input type="button"
+                               class="btn btn-warning btn-xlarge"
+                               value="Job Seeker"
+                               onclick="@("window.location.href='" + @Url.Action("Index", "Provider") + "'");">
+
+                        <div class="fsize">
+                            Search for the jobs and share your skills with people.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1 text-center" style="background-color: #eee;">
+        <h4>How it works?:</h4>
+    </div>
+    <div class="col-md-10 col-md-offset-1" style="background-color: #eee;">
+        <div class="col-md-1"></div>
+        <div class="col-md-2 text-center">
+            <h4 class="howitworks">Post a job</h4>
+            Deifine a skill you need, location, time and how much you are willing to pay.
+        </div>
+        <div class="col-md-2 text-center">
+            <h4 class="howitworks">Apply</h4>
+            Apply for a job that matches your skills, location and availability.
+        </div>
+        <div class="col-md-2 text-center">
+            <h4 class="howitworks">Offer</h4>
+            Choose the best applicant for your work and make an offer.
+        </div>
+        <div class="col-md-2 text-center">
+            <h4 class="howitworks">Work</h4>
+            Commit to the offer and deliver the work.
+        </div>
+        <div class="col-md-2 text-center">
+            <h4 class="howitworks">Feedback</h4>
+            Evaluate the quality of the completed work and leave a feedback.
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
+
+<div calss="row">
+    <div class="col-md-10 col-md-offset-1 text-center footer-background">
+            <h5 class="footer-colour"></h5>
+    </div>
+</div>
+

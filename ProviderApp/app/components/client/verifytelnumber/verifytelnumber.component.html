@@ -1,0 +1,32 @@
+<!-- This is shown in the Modal window from the jobdetails component -->
+<div>
+    <form [formGroup]="rForm" (ngSubmit)="submitVerificationCode(rForm.value)">
+        <div class="form-container">
+            <div class="form-group">
+                <label>An SMS message with 4 digits code was sent to your phone number.
+                Please Enter the code numbers here:</label>
+                <input type="text" class="form-control" formControlName="code">
+                <div class="alert" *ngIf="!rForm.controls['code'].valid && rForm.controls['code'].touched">Code must be 4 digits.</div>
+            </div>
+            
+
+            <!-- Submit button. ngSubmit call to submitVerificationCode() is defined at the top -->
+            <div class="form-group">
+                <div class="row">
+                    <label class="control-label" for="singlebutton"></label>
+                    <div *ngIf="verificationStatus < 0" class="text-center">
+                        <input type="submit" id="singlebutton" class="btn btn-primary" value="Submit Verification Code" [disabled]="!rForm.valid">
+                    </div>
+
+                    <!--  Successfull POST response changes status variable value from -1 to 1 -->
+                    <div *ngIf="verificationStatus == 1" class="alert alert-success box-msg text-center" role="alert">
+                        <strong>Code is correct, Thank you.</strong>
+                    </div>
+                    <div *ngIf="verificationStatus == 0" class="alert alert-danger box-msg text-center" role="alert">
+                        <strong>Code is incorrect. Close this window and validate again with new code.</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

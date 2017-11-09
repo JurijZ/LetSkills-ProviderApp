@@ -1,0 +1,171 @@
+<h1>Provider Details</h1>
+
+<div class="form-group">
+    <div class="col-md-3">
+        <div class="form-group">
+            <div class="row text-center">
+                <label>Rating:</label>
+                <b>{{ providerDetails?.rating }} of 10</b>
+            </div>
+            <div class="row text-center">
+                <!-- Trigger the modal with a button -->
+                <button type="button" class="btn btn-info btn-md text-center" data-toggle="modal" data-target="#myModal" (click)="getClientFeedbacks()">Feedbacks</button>
+
+                <!-- Feedback Modal window -->
+                <div id="myModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title text-center">Clients Feedback</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row" *ngFor="let feedback of clientFeedbacks" style="border-top:1px solid #cecece;">
+                                    <div >
+                                        <div class="col-md-4 text-left">
+                                            <div>Skills rated: <b>{{ feedback?.skills }}</b></div>
+                                            <div>Comunication rated: <b>{{ feedback?.communication }}</b></div>
+                                            <div>Punctuality rated: <b>{{ feedback?.punctuality }}</b></div>
+                                        </div>
+                                        <div class="col-md-8 text-left">
+                                            <!--<div><h4>Job Title: {{ feedback?.jobTitle }}</h4></div>-->
+                                            <!--<div class="col-md-4"><h4>Date: {{ feedback?.feedbackTimestamp }}</h4></div>-->
+                                            <h5 class="card-text">{{ feedback?.feedBackDescription }}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--<p>Some text in the modal.</p>-->
+                            </div>
+                            <!--<div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>-->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="form-group">
+
+            <div class="row text-center">
+                <label>Skills:</label>
+
+                <ul class="list-unstyled text-center">
+                    <li *ngFor="let skill of providerDetails?.skills">
+                        {{skill}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="row text-center">
+            <label>Name:</label>
+            {{ providerDetails?.name || 'Loading Data...' }}
+        </div>
+        <div class="row text-center">
+            <label>Surname:</label>
+            {{ providerDetails?.surname }}
+        </div>
+        <div class="row text-center">
+            <label>Have a Car:</label>
+            {{ providerDetails?.haveAcar }}
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="form-group">
+            <div class="row text-center" id="thumbimages">
+                <div *ngIf="providerDetails?.profileImageUrl">
+                    <img src="{{providerDetails?.profileImageUrl}}"
+                         class="tn">
+                </div>
+                <div *ngIf="!providerDetails?.profileImageUrl">
+                    <img src="https://s3.eu-west-2.amazonaws.com/images.angular4.test1/defaults/DefaultProfilePicture.PNG"
+                         class="tn">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- this creates a google map on the page with the given lat/lng from -->
+<!-- the component as the initial center of the map: -->
+<div class="form-group">
+    <div class="col-md-12">
+        <p> Provider location: </p>
+        <agm-map [latitude]="locationLat"
+                 [longitude]="locationLng"
+                 [mapDraggable]="false"
+                 [scrollwheel]="false"
+                 [zoom]="zoom">
+
+            <agm-marker [latitude]="locationLat"
+                        [longitude]="locationLng">
+
+            </agm-marker>
+        </agm-map>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="mt-2 col-md-12">
+        
+        <label for="sel1">Select Offer expiry duration (minutes):</label>
+        <select class="form-control" id="sel1" (change)="selectExpiryDuration($event.target.value)">
+            <option *ngFor="let duration of durations" [value]="duration">
+                {{duration}}
+            </option>
+        </select>
+    </div>
+</div>
+
+
+<div class="mt-2 col-md-12 text-center">
+    <label class="control-label" for="singlebutton"></label>
+    <div *ngIf="status != 1">
+        <div *ngIf="availableAmmount >= 5">
+            <div *ngIf="telephoneIsVerified == 0" class="alert alert-danger box-msg text-center" role="alert">
+                <strong>To make an Offer please verify your telephone number</strong>
+                <button class="float-center btn btn-default btn-primary" (click)="navigateToAJob()">
+                    Go to the Job
+                </button>
+            </div>
+
+            <div *ngIf="telephoneIsVerified == 1" class="text-center">
+                <button class="float-center btn btn-default btn-primary" (click)="makeAnOffer()">
+                    Make a Job Offer to this person
+                </button>
+            </div>
+            Making an offer will reserve 5 credits from your wallet.
+            If the job offer is not accepted the amount is automatically refunded.
+        </div>
+        <div *ngIf="availableAmmount < 5" class="alert alert-danger box-msg text-center" role="alert">
+            <strong>To make an Offer you need at least 5 credits available </strong>
+            <button class="float-center btn btn-default btn-primary" (click)="navigateToAWallet()">
+                Go to the Wallet
+            </button>
+        </div>
+    </div>
+
+    <!--  Successfull POST response changes status variable value from -1 to 1 -->
+    <div *ngIf="status == 1" class="alert alert-success box-msg text-center" role="alert">
+        <strong>Job Offer is Successfully sent</strong>
+    </div>
+    <div *ngIf="status == 0" class="alert alert-danger box-msg text-center" role="alert">
+        <strong>Job Offer did not succeed, try again!</strong>
+    </div>
+</div>
+
+
+
+<!-- Footer at the bottom of the page to have some contact details etc -->
+<div id="footer">
+    <footer class="container"></footer>
+</div>

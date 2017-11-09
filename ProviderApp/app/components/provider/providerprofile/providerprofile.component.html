@@ -1,0 +1,152 @@
+<h1>My Profile</h1>
+
+<div class="form-group">
+    <div class="col-md-8">
+        <table class="table table-sm table-striped">
+            <colgroup>
+                <col class="col-md-3">
+                <col class="col-md-5">
+            </colgroup>
+            <tbody>
+                <!--<tr> <th>ID:</th> <td>{{ providerProfile?.id || 'Loading Data...' }}</td> </tr>-->
+                <!--<tr> <th>Last login Time: </th> <td>{{ providerProfile?.lastLoginTime | date: 'dd-MMM-yyyy'}}</td> </tr>-->
+                <tr> <th>Name: </th> <td>{{ providerProfile?.name || 'Loading Data...' }}</td> </tr>
+                <tr> <th>Surname: </th> <td>{{ providerProfile?.surname }}</td> </tr>
+                <tr> <th>User Name: </th> <td>{{ providerProfile?.username }}</td> </tr>
+                <tr> <th>Email: </th> <td>{{ providerProfile?.contactEmail }}</td> </tr>
+                <tr *ngIf="providerProfile?.contactTelephone1 == providerProfile?.telephone1Verified;">
+                    <th>Primary Telephone: </th>
+                    <td>
+                        {{ providerProfile?.contactTelephone1 }}
+                        <button type="button"
+                                class="btn btn-success btn-xs text-center">
+                            Number is verified
+                        </button>
+                    </td>
+                </tr>
+                <tr *ngIf="providerProfile?.contactTelephone1 != providerProfile?.telephone1Verified;">
+                    <th>Primary Telephone: </th>
+                    <td>
+                        {{ providerProfile?.contactTelephone1 }}
+                        <button type="button"
+                                class="btn btn-danger btn-xs text-center"
+                                data-toggle="modal" data-target="#myModal"
+                                (click)="sendVerificationSMS(providerProfile?.contactTelephone1)">
+                            Verify this telephone number
+                        </button>
+                    </td>
+                </tr>
+                <tr> <th>Secondary Telephone: </th> <td>{{ providerProfile?.contactTelephone2 }}</td> </tr>
+                <tr *ngIf="providerProfile?.haveAcar"> <th>Have a Car: </th> <td>Yes</td> </tr>
+                <tr *ngIf="!providerProfile?.haveAcar"> <th>Have a Car: </th> <td>No</td> </tr>
+                <!--<tr> <th>Country: </th> <td>{{ providerProfile?.country }}</td> </tr>
+                <tr> <th>Town: </th> <td>{{ providerProfile?.city }}</td> </tr>
+                <tr> <th>Address 1: </th> <td>{{ providerProfile?.addressLine1 }}</td> </tr>
+                <tr> <th>Address 1: </th> <td>{{ providerProfile?.addressLine2 }}</td> </tr>
+                <tr> <th>Post Code: </th> <td>{{ providerProfile?.postCode }}</td> </tr>
+                <tr> <th>Latitude: </th> <td>{{ providerProfile?.locationLat }}</td> </tr>
+                <tr> <th>Longitude: </th> <td>{{ providerProfile?.locationLng }}</td> </tr>-->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-4">
+        <div class="form-group" >
+            <div class="row text-center" id="thumbimages">
+                <div *ngIf="providerProfile?.profileImageUrl">
+                    <img src="{{providerProfile?.profileImageUrl}}"
+                         class="tn"
+                         data-toggle="modal"
+                         data-target="#selectedImageModal2"
+                         (click)=setSelectedImage()>
+                </div>
+                <div *ngIf="!providerProfile?.profileImageUrl">
+                    <img src="https://s3.eu-west-2.amazonaws.com/images.angular4.test1/defaults/DefaultProfilePicture.PNG"
+                         class="tn"
+                         data-toggle="modal"
+                         data-target="#selectedImageModal2"
+                         (click)=setSelectedImage()>
+                </div>
+
+                <div class="modal fade" id="selectedImageModal2">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <img *ngIf="selectedImage" src="{{selectedImage}}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <div class="row text-center">
+                <label >My Skills:</label>
+
+                <ul class="list-unstyled text-center">
+                    <li *ngFor="let skill of providerProfile?.skills">
+                        {{skill}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- this creates a google map on the page with the given lat/lng from -->
+<!-- the component as the initial center of the map: -->
+<div class="mt-2 col-md-12 row">
+    <p> My location: </p>
+    <agm-map [latitude]="locationLat"
+             [longitude]="locationLng"
+             [mapDraggable]="false"
+             [scrollwheel]="false"
+             [zoom]="zoom">
+
+        <agm-marker [latitude]="locationLat"
+                    [longitude]="locationLng">
+
+        </agm-marker>
+    </agm-map>
+</div>
+
+<!-- A modal windows to verify telephone number -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" (click)="getCurrentTime()">&times;</button>
+                <h4 class="modal-title text-center">Verify Your Mobile Phone number</h4>
+            </div>
+            <div class="modal-body">
+                <verifytelnumber [reloader]=currentTime
+                                 [tel_number]=verificationTelNumber
+                                 [job_id]=verificationJobId
+                                 (verifiedtelnumber)=verificationTelNotification($event)>
+                </verifytelnumber>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Edit Client Profile button --> 
+<div class="form-group">
+    <div class="col-md-12">
+        <label class="control-label" for="singlebutton"></label>
+        <div class="text-center">
+            <button class="float-center btn btn-default btn-primary" (click)="editProviderProfile()">
+                Edit My Profile
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Footer at the bottom of the page to have some contact details etc -->
+<div id="footer">
+    <footer class="container"></footer>
+</div>

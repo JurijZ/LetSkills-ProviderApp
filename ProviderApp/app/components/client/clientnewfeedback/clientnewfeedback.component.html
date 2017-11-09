@@ -1,0 +1,61 @@
+<!-- This is shown in the Modal window from the clientfeedbacks component -->
+<div>
+    <form [formGroup]="rForm" (ngSubmit)="createNewClientFeedback(rForm.value)">
+        <div class="form-container">
+            <div class="form-group">
+                <!--<label>Your feedback:</label>-->
+                <textarea class="form-control" rows="3" formControlName="feedbackDescription"></textarea>
+                <div class="alert" *ngIf="!rForm.controls['feedbackDescription'].valid && rForm.controls['feedbackDescription'].touched">Feedback should be between 5 and 400 characters long.</div>
+            </div>
+            <div>
+                Job Id: {{job_id}}
+            </div>
+            <div>
+                Provider Id: {{provider_id}}
+            </div>
+
+            <!-- Stars -->
+            <div>
+                <span *ngFor="let star of stars; let i = index">
+                    <i *ngIf="i < skillsRate" class="glyphicon glyphicon-star star" (click)="updateSkillsRate(i + 1)"></i>
+                    <i *ngIf="i >= skillsRate" class="glyphicon glyphicon-star-empty star" (click)="updateSkillsRate(i + 1)"></i>
+                </span>
+                Skills
+            </div>
+
+            <div>
+                <span *ngFor="let star of stars; let i = index">
+                    <i *ngIf="i < communicationRate" class="glyphicon glyphicon-star star" (click)="updateCommunicationRate(i + 1)"></i>
+                    <i *ngIf="i >= communicationRate" class="glyphicon glyphicon-star-empty star" (click)="updateCommunicationRate(i + 1)"></i>
+                </span>
+                Communication
+            </div>
+
+            <div>
+                <span *ngFor="let star of stars; let i = index">
+                    <i *ngIf="i < punctualityRate" class="glyphicon glyphicon-star star" (click)="updatePunctualityRate(i + 1)"></i>
+                    <i *ngIf="i >= punctualityRate" class="glyphicon glyphicon-star-empty star" (click)="updatePunctualityRate(i + 1)"></i>
+                </span>
+                Punctuality
+            </div>
+
+            <!-- Submit button. ngSubmit call to createNewClientFeedback() is defined at the top -->
+            <div class="form-group">
+                <div class="row">
+                    <label class="control-label" for="singlebutton"></label>
+                    <div *ngIf="status != 1" class="text-center">
+                        <input type="submit" id="singlebutton" class="btn btn-primary" value="Submit My Feedback" [disabled]="!rForm.valid">
+                    </div>
+
+                    <!--  Successfull POST response changes status variable value from -1 to 1 -->
+                    <div *ngIf="status == 1" class="alert alert-success box-msg text-center" role="alert">
+                        <strong>Your Feedback is Successfully Submited</strong>
+                    </div>
+                    <div *ngIf="status == 0" class="alert alert-danger box-msg text-center" role="alert">
+                        <strong>Feedback Creation Failed! Please try again.</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

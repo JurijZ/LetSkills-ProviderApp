@@ -1,0 +1,114 @@
+<h1>Edit My Profile</h1>
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-1">
+            <form [formGroup]="rForm" (ngSubmit)="editClientProfile(rForm.value)">
+                <div class="row">
+                    <div class="form-group">
+                        <label>Name:</label>
+                        <input type="text" class="form-control" formControlName="name">
+                        <div class="alert" *ngIf="!rForm.controls['name'].valid &&
+                                                rForm.controls['name'].touched">{{ nameAlert }}</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Surname:</label>
+                        <input type="text" class="form-control" formControlName="surname">
+                        <div class="alert" *ngIf="!rForm.controls['surname'].valid &&
+                                                rForm.controls['surname'].touched">Enter your surname</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Your Email:</label>
+                        <input type="text" class="form-control" formControlName="contactEmail">
+                        <div class="alert" *ngIf="!rForm.controls['contactEmail'].valid &&
+                                                rForm.controls['contactEmail'].touched">Enter your email address</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Primary Telephone number:</label>
+                        <input type="text" class="form-control" formControlName="contactTelephone1">
+                        <div class="alert" *ngIf="!rForm.controls['contactTelephone1'].valid &&
+                                                       rForm.controls['contactTelephone1'].touched">Number must start with + and be at least 7 numbers</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Secondary Telephone number:</label>
+                        <input type="text" class="form-control" formControlName="contactTelephone2">
+                        <div class="alert" *ngIf="!rForm.controls['contactTelephone2'].valid &&
+                                                       rForm.controls['contactTelephone2'].touched">Number must start with + and be at least 7 numbers</div>
+                    </div>
+                </div>
+
+                <!-- SUBMIT button. ngSubmit call to createNewJob() is defined at the top -->
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <label class="control-label" for="singlebutton"></label>
+                        <div class="text-center">
+                            <input type="submit" id="singlebutton" class="btn btn-primary" value="Save Changes" [disabled]="!rForm.valid">
+                        </div>
+
+                        <!--  Successfull POST response changes status variable value from -1 to 1 -->
+                        <div *ngIf="status == 1" class="alert alert-success box-msg text-center" role="alert">
+                            <strong>Your Profile is Successfully Updated</strong>
+                        </div>
+                        <div *ngIf="status == 0" class="alert alert-danger box-msg text-center" role="alert">
+                            <strong>Profile Update Failed!</strong>
+                        </div>
+
+                    </div>
+                </div>
+
+            </form>
+         </div>
+
+        <!--  Profile Image section -->
+        <div class="col-md-4 form-group" align="center">
+            <div id="thumbimages">
+                <div *ngIf="this.clientProfile?.profileImageUrl">
+                    <span class="close" (click)=removeProfileImage()>&times;</span>
+                    <img src="{{this.clientProfile?.profileImageUrl}}"
+                            class="tn"
+                            data-toggle="modal"
+                            data-target="#selectedImageModal2"
+                            (click)=setSelectedImage()>
+                </div>
+                <div *ngIf="!this.clientProfile?.profileImageUrl">
+                    <img src="https://s3.eu-west-2.amazonaws.com/images.angular4.test1/defaults/DefaultProfilePicture.PNG"
+                            class="tn">
+                </div>
+
+                <div>
+                    <input type="file" class="form-control" id="btnUpload" value="Upload" (change)="fileChange($event)" />
+                    <div class="alert" *ngIf="!imageCountValidation">Please upload only 1 image</div>
+                </div>
+
+                <div class="modal fade" id="selectedImageModal2">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <img *ngIf="selectedImage" src="{{selectedImage}}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spinner -->
+                <div class="loader" [hidden]="uploading"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Footer at the bottom of the page to have some contact details etc -->
+<div id="footer" class="form-group">
+    <div class="col-md-12">
+        <footer class="container">Let Skills Limited</footer>
+    </div>
+</div>

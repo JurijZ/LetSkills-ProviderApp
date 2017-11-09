@@ -1,0 +1,159 @@
+<h1>Job Details</h1>
+
+<div class="form-group">
+    <div class="container" id="thumbimages">
+        <ul>
+            <li *ngFor="let image of jobDetails?.images">
+                <img src="{{image}}"
+                     class="tn"
+                     data-toggle="modal"
+                     data-target="#selectedImageModal2"
+                     (click)=setSelectedImage(image)>
+            </li>
+        </ul>
+
+        <div class="modal fade" id="selectedImageModal2">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <img *ngIf="selectedImage" src="{{selectedImage}}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-2 col-md-12 row">
+
+    <table class="table table-sm table-striped">
+        <colgroup>
+            <col class="col-md-2">
+            <col class="col-md-5">
+        </colgroup>
+        <tbody>
+            <tr> <th>Job State: </th> <td>{{ stateIdToName(jobDetails?.jobState) }}</td> </tr>
+            <tr> <th>ID:</th> <td>{{ jobDetails?.id || 'Loading Data...' }}</td> </tr>
+            <tr> <th>Job Title: </th> <td>{{ jobDetails?.jobTitle }}</td> </tr>
+            <tr> <th>Description: </th> <td>{{ jobDetails?.jobDescription }}</td> </tr>
+            <tr *ngIf="jobDetails?.ratePerHour;"> <th>Rate GBP (Per Hour): </th> <td>{{ jobDetails?.ratePerHour }}</td> </tr>
+            <tr *ngIf="jobDetails?.rateFixed;"> <th>Rate GBP (Fixed): </th> <td>{{ jobDetails?.rateFixed }}</td> </tr>
+            <tr *ngIf="jobDetails?.durationDays;"> <th>Duration (Days): </th> <td>{{ jobDetails?.durationDays }}</td> </tr>
+            <tr *ngIf="jobDetails?.durationHours;"> <th>Duration (Hours): </th> <td>{{ jobDetails?.durationHours }}</td> </tr>
+            <tr *ngIf="jobDetails?.contactTelephone1 == jobDetails?.telephone1Verified;"> <th>Primary Telephone: </th> 
+                <td>{{ jobDetails?.contactTelephone1 }}
+                    <button type="button"
+                            class="btn btn-success btn-xs text-center">
+                        Number is verified
+                    </button>
+                </td> </tr>
+            <tr *ngIf="jobDetails?.contactTelephone1 != jobDetails?.telephone1Verified;"> <th>Primary Telephone: </th>        
+                <td>{{ jobDetails?.contactTelephone1 }}
+                    <button type="button"
+                            class="btn btn-danger btn-xs text-center"
+                            data-toggle="modal" data-target="#myModal"
+                            (click)="sendVerificationSMS(jobDetails?.contactTelephone1)">
+                        Verify this telephone number
+                    </button>
+                </td> </tr>
+
+            <tr> <th>Secondary Telephone: </th> <td>{{ jobDetails?.contactTelephone2 }}</td> </tr>
+            <tr> <th>Required Skill: </th> <td>{{ jobDetails?.skill }}</td> </tr>
+            <tr> <th>Planned Start Date: </th> <td>{{ jobDetails?.plannedStartDate | date: 'dd-MMM-yyyy' }}</td> </tr>
+            <tr> <th>Planned Finish Date: </th> <td>{{ jobDetails?.plannedFinishDate | date: 'dd-MMM-yyyy' }}</td> </tr>
+            <tr> <th>Location Latitude: </th> <td>{{ jobDetails?.locationLat }}</td> </tr>
+            <tr> <th>Location Longitude: </th> <td>{{ jobDetails?.locationLng }}</td> </tr>
+            </tbody>
+    </table>
+</div>
+
+<!-- this creates a google map on the page with the given lat/lng from -->
+<!-- the component as the initial center of the map: -->
+<div class="mt-2 col-md-12 row">
+    <p> Job location: </p>
+    <agm-map [latitude]="locationLat"
+             [longitude]="locationLng"
+             [mapDraggable]="false"
+             [scrollwheel]="false"
+             [zoom]="zoom">
+
+        <agm-marker [latitude]="locationLat"
+                    [longitude]="locationLng">
+
+        </agm-marker>
+    </agm-map>
+</div>
+
+<!-- A modal windows to verify telephone number -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" (click)="getCurrentTime()">&times;</button>
+                <h4 class="modal-title text-center">Verify Your Mobile Phone number</h4>
+            </div>
+            <div class="modal-body">
+                <verifytelnumber [reloader]=currentTime
+                                 [tel_number]=verificationTelNumber
+                                 [job_id]=verificationJobId
+                                 (verifiedtelnumber)=verificationTelNotification($event)>
+                </verifytelnumber>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Vertical space --> 
+<div class=" mt-2 col-md-12" style="height:20px;"></div>
+
+<!-- Button section --> 
+<div class="row mt-2 col-md-12">
+    <label class="control-label" for="singlebutton"></label>
+    <div class="text-center">
+        <div *ngIf="editable">
+            <button class="float-center btn btn-default btn-primary" (click)="editJobDetails(jobDetails?.id)">
+                Edit Job Details
+            </button>
+        </div>
+
+        <div *ngIf="unpublishable">
+            <button class="float-center btn btn-default btn-primary" (click)="unpublishJob(jobDetails?.id)">
+                Put On Hold
+            </button>
+            <h5>To Edit this job you have to put it On Hold.</h5>
+            <h5>Putting On Hold deletes all current applications.</h5>
+            <h5>You will be able to republish this job as a new one.</h5>
+        </div>
+        <!--  Successfull PUT response changes status variable value from -1 to 1 -->
+        <div *ngIf="putOnHoldStatus == 1" class="alert alert-success box-msg text-center" role="alert">
+            <strong>Job is Successfully Put On Hold</strong>
+        </div>
+        <div *ngIf="putOnHoldStatus == 0" class="alert alert-danger box-msg text-center" role="alert">
+            <strong>Job Update Failed!</strong>
+        </div>
+
+        <!-- Complete the job -->
+        <div *ngIf="complitable">
+            <button class="float-center btn btn-default btn-primary" (click)="completeJob(jobDetails?.id)">
+                Job Completed
+            </button>
+            <h5>If the job is finished please click on "Job Completed".</h5>
+            <h5>After that you will be able to Rate persons' performance.</h5>
+        </div>
+        <div *ngIf="complitedStatus == 1" class="alert alert-success box-msg text-center" role="alert">
+            <strong>Job is Successfully marked as Completed</strong>
+            <button class="float-right btn btn-sm btn-primary" (click)="leaveFeedback()">Leave Feedback</button>
+        </div>
+        <div *ngIf="complitedStatus == 0" class="alert alert-danger box-msg text-center" role="alert">
+            <strong>We could not mark this Job as Completed! Try again later.</strong>
+        </div>
+    </div>
+</div>
+
+
+<!-- Footer at the bottom of the page to have some contact details etc -->
+<div id="footer">
+    <footer class="container"></footer>
+</div>

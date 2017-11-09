@@ -1,0 +1,43 @@
+#onhold {
+    background-color: silver;
+    cursor: pointer;
+    border-radius: 5px/5px;
+}
+
+.boxCenterNumber {
+    height: 120px;
+    width: 120px;
+    border-radius: 5%;
+    background-color: whitesmoke;
+    border: 2px solid black;
+    font-size: 64px;
+    text-align: center;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center; /* align vertical */
+}
+
+.boxCenterNumber2 {
+    margin-top: 20px;
+    height: 120px;
+    width: 120px;
+    border-radius: 5%;
+    background-color: whitesmoke;
+    border: 2px solid green;
+    font-size: 32px;
+    text-align: center;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center; /* align vertical */
+    cursor: pointer;
+}
+
+.boxCenterText {
+    width: 120px;
+    text-align: center;
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center; /* align vertical */
+}

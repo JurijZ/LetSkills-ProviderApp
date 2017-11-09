@@ -1,0 +1,310 @@
+
+<p *ngIf="!clientBalance"><em>Loading...</em></p>
+<div>
+    <h1>
+        My Publications
+        <button class="btn btn-primary" (click)="refresh()"><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+    </h1>
+</div>
+
+
+<div class="container">
+    <div class="col-md-8">
+
+        <!-- Active jobs in Progress -->
+        <div class="row" id="inprogress" (click)="inProgpressCollapse()">
+            <div class="col-md-6">
+                <h4>In Progress Jobs ({{inProgressJobsLength}}):</h4>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="isInProgpressCollapse">
+            <div class="col-md-1">
+
+            </div>
+            <div class="col-md-11">
+                <table class="table">
+                    <tbody>
+                        <tr *ngFor="let clientJob of inProgressJobs">
+                            <td class="col-md-8" id="job" (click)="getJobDetails(clientJob?.id)">
+                                <div>
+                                    <h4 class="h4">{{ clientJob?.jobTitle }}</h4>
+                                    <h5 class="card-text p-a-1">{{ (clientJob?.jobDescription.length > 30) ? (clientJob?.jobDescription | slice:0:30) + '...' : (clientJob?.jobDescription) }}</h5>
+                                    <h5>Job State: <b>{{ stateIdToName(clientJob?.jobState) }}</b></h5>
+                                </div>
+                            </td>
+                            <td id="job" (click)="getJobDetails(clientJob?.id)">
+                                <div>
+                                    <h5 *ngIf="clientJob?.ratePerHour;" class="float-right">Rate per hour: {{ clientJob?.ratePerHour }} GBP</h5>
+                                    <h5 *ngIf="clientJob?.rateFixed;" class="float-right">Fixed rate: {{ clientJob?.rateFixed }} GBP</h5>
+                                    <h5 *ngIf="clientJob?.durationDays;" class="float-right">Duration: {{ clientJob?.durationDays }} days</h5>
+                                    <h5 *ngIf="clientJob?.durationHours;" class="float-right">Duration: {{ clientJob?.durationHours }} hours</h5>
+                                    <button class="float-right btn btn-sm btn-primary" (click)="getProviderDetails(clientJob?.id)">Executor Details</button>
+                                </div>
+                            </td>
+                        </tr>
+                    <tbody>
+                </table>
+
+                <!-- pagination buttons -->
+                <!--<div *ngIf="pager.pages && pager.pages.length" class="text-center provider-2">
+
+                    <button [class]="{disabled:pager.currentPage === 1}"
+                            (click)="setPage(pager.currentPage - 1)">
+                        Previous
+                    </button>
+                    <button *ngFor="let page of pager.pages"
+                            class="btn btn-default mx-1"
+                            [class.active]="pager.currentPage == page"
+                            (click)="setPage(page)">
+                        {{page}}
+                    </button>
+                    <button [class]="{disabled:pager.currentPage === pager.totalPages}"
+                            (click)="setPage(pager.currentPage + 1)">
+                        Next
+                    </button>
+                </div>-->
+            </div>
+        </div>
+
+        <!-- -->
+        <div class="row" id="published" (click)="publishedCollapse()">
+            <div class="col-md-4">
+                <h4>Published Jobs ({{publishedJobsLength}}):</h4>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="isPublishedCollapse" >
+            <div class="col-md-1">
+
+            </div>
+            <div class="col-md-11">
+                <table class="table">
+                    <tbody>
+                        <tr *ngFor="let clientJob of publishedJobs">
+                            <td class="col-md-8" id="job" (click)="getJobDetails(clientJob?.id)">
+                                <div>
+                                    <h4 class="h4">{{ clientJob?.jobTitle }}</h4>
+                                    <h5 class="card-text p-a-1">{{ (clientJob?.jobDescription.length > 30) ? (clientJob?.jobDescription | slice:0:30) + '...' : (clientJob?.jobDescription) }}</h5>
+                                    <h5>Job State: <b>{{ stateIdToName(clientJob?.jobState) }}</b></h5>
+                                </div>
+                            </td>
+                            <td id="job" (click)="getJobDetails(clientJob?.id)">
+                                <div>
+                                    <h5 *ngIf="clientJob?.ratePerHour;" class="float-right">Rate per hour: {{ clientJob?.ratePerHour }} GBP</h5>
+                                    <h5 *ngIf="clientJob?.rateFixed;" class="float-right">Fixed rate: {{ clientJob?.rateFixed }} GBP</h5>
+                                    <h5 *ngIf="clientJob?.durationDays;" class="float-right">Duration: {{ clientJob?.durationDays }} days</h5>
+                                    <h5 *ngIf="clientJob?.durationHours;" class="float-right">Duration: {{ clientJob?.durationHours }} hours</h5>
+                                    <button class="float-right btn btn-sm btn-primary" (click)="getApplications(clientJob?.id)"><span class="badge">{{ clientJob?.numberOfApplications }}</span> Applications</button>
+                                </div>
+                            </td>
+                        </tr>
+                    <tbody>
+                </table>
+
+                <!-- pagination buttons -->
+                <!--<div *ngIf="pager.pages && pager.pages.length" class="text-center provider-2">
+
+                    <button [class]="{disabled:pager.currentPage === 1}"
+                            (click)="setPage(pager.currentPage - 1)">
+                        Previous
+                    </button>
+                    <button *ngFor="let page of pager.pages"
+                            class="btn btn-default mx-1"
+                            [class.active]="pager.currentPage == page"
+                            (click)="setPage(page)">
+                        {{page}}
+                    </button>
+                    <button [class]="{disabled:pager.currentPage === pager.totalPages}"
+                            (click)="setPage(pager.currentPage + 1)">
+                        Next
+                    </button>
+                </div>-->
+            </div>
+        </div>
+
+        <!-- -->
+        <div class="row" id="onhold" (click)="onHoldCollapse()">
+            <div class="col-md-4">
+                <h4>On Hold Jobs ({{onHoldJobsLength}}):</h4>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="isOnHoldCollapse">
+            <div class="col-md-1">
+
+            </div>
+            <div class="col-md-11">
+                <table class="table">
+                    <tbody>
+                        <tr *ngFor="let clientJob of onHoldJobs">
+                            <td class="col-md-8" id="job" (click)="getJobDetails(clientJob?.id)">
+                                <div>
+                                    <h4 class="h4">{{ clientJob?.jobTitle }}</h4>
+                                    <h5 class="card-text p-a-1">{{ (clientJob?.jobDescription.length > 30) ? (clientJob?.jobDescription | slice:0:30) + '...' : (clientJob?.jobDescription) }}</h5>
+                                    <h5>Job State: <b>{{ stateIdToName(clientJob?.jobState) }}</b></h5>
+                                </div>
+                            </td>
+                            <td id="job" (click)="getJobDetails(clientJob?.id)">
+                                <div>
+                                    <h5 *ngIf="clientJob?.ratePerHour;" class="float-right">Rate per hour: {{ clientJob?.ratePerHour }} GBP</h5>
+                                    <h5 *ngIf="clientJob?.rateFixed;" class="float-right">Fixed rate: {{ clientJob?.rateFixed }} GBP</h5>
+                                    <h5 *ngIf="clientJob?.durationDays;" class="float-right">Duration: {{ clientJob?.durationDays }} days</h5>
+                                    <h5 *ngIf="clientJob?.durationHours;" class="float-right">Duration: {{ clientJob?.durationHours }} hours</h5>
+                                </div>
+                            </td>
+                        </tr>
+                    <tbody>
+                </table>
+
+                <!-- pagination buttons -->
+                <!--<div *ngIf="pager.pages && pager.pages.length" class="text-center provider-2">
+
+                <button [class]="{disabled:pager.currentPage === 1}"
+                        (click)="setPage(pager.currentPage - 1)">
+                    Previous
+                </button>
+                <button *ngFor="let page of pager.pages"
+                        class="btn btn-default mx-1"
+                        [class.active]="pager.currentPage == page"
+                        (click)="setPage(page)">
+                    {{page}}
+                </button>
+                <button [class]="{disabled:pager.currentPage === pager.totalPages}"
+                        (click)="setPage(pager.currentPage + 1)">
+                    Next
+                </button>
+            </div>-->
+            </div>
+        </div>
+        
+        <!-- -->
+        <div class="row" id="expired" (click)="expiredCollapse()">
+            <div class="col-md-4">
+                <h4>Expired Jobs ({{expiredJobsLength}}):</h4>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="isExpiredCollapse">
+            <div class="col-md-1">
+
+            </div>
+            <div class="col-md-11">
+                <table class="table">
+                    <tbody>
+                        <tr *ngFor="let clientJob of expiredJobs">
+                            <td class="col-md-8" id="job" (click)="getJobDetails(clientJob?.id)">
+                                <div>
+                                    <h4 class="h4">{{ clientJob?.jobTitle }}</h4>
+                                    <h5 class="card-text p-a-1">{{ (clientJob?.jobDescription.length > 30) ? (clientJob?.jobDescription | slice:0:30) + '...' : (clientJob?.jobDescription) }}</h5>
+                                    <h5>Job State: <b>{{ stateIdToName(clientJob?.jobState) }}</b></h5>
+                                </div>
+                            </td>
+                            <td id="job" (click)="getJobDetails(clientJob?.id)">
+                                <div>
+                                    <h5 *ngIf="clientJob?.ratePerHour;" class="float-right">Rate per hour: {{ clientJob?.ratePerHour }} GBP</h5>
+                                    <h5 *ngIf="clientJob?.rateFixed;" class="float-right">Fixed rate: {{ clientJob?.rateFixed }} GBP</h5>
+                                    <h5 *ngIf="clientJob?.durationDays;" class="float-right">Duration: {{ clientJob?.durationDays }} days</h5>
+                                    <h5 *ngIf="clientJob?.durationHours;" class="float-right">Duration: {{ clientJob?.durationHours }} hours</h5>
+                                </div>
+                            </td>
+                        </tr>
+                    <tbody>
+                </table>
+
+                <!-- pagination buttons -->
+                <!--<div *ngIf="pager.pages && pager.pages.length" class="text-center provider-2">
+
+                    <button [class]="{disabled:pager.currentPage === 1}"
+                            (click)="setPage(pager.currentPage - 1)">
+                        Previous
+                    </button>
+                    <button *ngFor="let page of pager.pages"
+                            class="btn btn-default mx-1"
+                            [class.active]="pager.currentPage == page"
+                            (click)="setPage(page)">
+                        {{page}}
+                    </button>
+                    <button [class]="{disabled:pager.currentPage === pager.totalPages}"
+                            (click)="setPage(pager.currentPage + 1)">
+                        Next
+                    </button>
+                </div>-->
+            </div>
+        </div>
+
+
+        <!---->
+        <div class="row" id="completed" (click)="completedCollapse()">
+            <div class="col-md-4">
+                <h4>Completed Jobs ({{completedJobsLength}}):</h4>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="isCompletedCollapse">
+            <div class="col-md-1">
+
+            </div>
+            <div class="col-md-11">
+                <table class="table">
+                    <tbody>
+                        <tr *ngFor="let clientJob of completedJobs">
+                            <td class="col-md-8" id="job" (click)="getJobDetails(clientJob?.id)">
+                                <div>
+                                    <h4 class="h4">{{ clientJob?.jobTitle }}</h4>
+                                    <h5>Job State: <b>{{ stateIdToName(clientJob?.jobState) }}</b></h5>
+                                </div>
+                            </td>
+                            <td id="job" (click)="getJobDetails(clientJob?.id)">
+                                <div>
+                                    <button class="float-right btn btn-sm btn-primary" (click)="leaveFeedback()">Leave Feedback</button>
+                                </div>
+                            </td>
+                        </tr>
+                    <tbody>
+                </table>
+
+                <!-- pagination buttons -->
+                <!--<div *ngIf="pager.pages && pager.pages.length" class="text-center provider-2">
+
+                    <button [class]="{disabled:pager.currentPage === 1}"
+                            (click)="setPage(pager.currentPage - 1)">
+                        Previous
+                    </button>
+                    <button *ngFor="let page of pager.pages"
+                            class="btn btn-default mx-1"
+                            [class.active]="pager.currentPage == page"
+                            (click)="setPage(page)">
+                        {{page}}
+                    </button>
+                    <button [class]="{disabled:pager.currentPage === pager.totalPages}"
+                            (click)="setPage(pager.currentPage + 1)">
+                        Next
+                    </button>
+                </div>-->
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div>
+            <div class="boxCenterNumber" (click)="goToClientWallet()">
+                <span>{{availableAmmount | currency:'GBP':true:'1.0-0'}}</span>
+            </div>
+            Available Balance
+        </div>
+        <div>
+            <div class="boxCenterNumber2" (click)="openInProgress()">
+                <span>{{acceptedJobsLength}}</span>
+            </div>
+            Accepted Offers
+        </div>
+        <div>
+            <div class="boxCenterNumber2" (click)="openInProgress()">
+                <span>{{offeredJobsLength}}</span>
+            </div>
+            Waiting Offer Acceptance
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,111 @@
+
+
+<p *ngIf="!myCompletedJobs"><em>Loading...</em></p>
+
+<div class="container">
+    <div class="row">
+        <h1>Completed Jobs</h1>
+        <div class="col-md-10">
+            <div *ngIf="myCompletedJobs">
+                <table class="table">
+                    <tbody>
+                        <tr *ngFor="let myJob of myCompletedJobsPaged">
+                            <td class="col-md-8">
+                                <div>
+                                    <h4 class="h4">{{ myJob?.jobTitle }}</h4>
+                                    <h5>Job State: <b>{{ stateIdToName(myJob?.jobState) }}</b></h5>
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <h4 class="float-right">Completed by: <b>{{ myJob?.providerName }}</b></h4>
+                                    <!--<button class="float-right btn btn-sm btn-primary" (click)="leaveFeedback(myJob?.jobId, myJob?.providerId)">Leave Feedback</button -->
+
+                                    <!-- Button to trigger the modal for Existing Feedbacks -->
+                                    <div *ngIf="myJob?.feedbackSubmited != null">
+                                        <button  type="button"
+                                                class="btn btn-success btn-md text-center"
+                                                data-toggle="modal" data-target="#myModal3"
+                                                (click)="existingFeedbackParameters(myJob?.jobId)">
+                                            View My Feedback {{myJob?.jobId}}
+                                        </button>
+                                    </div>
+                                
+                                    <!-- Button to trigger the modal for New Feedback -->
+                                    <div *ngIf="myJob?.feedbackSubmited == null">
+                                        <button type="button" 
+                                                class="btn btn-info btn-md text-center" 
+                                                data-toggle="modal" data-target="#myModal2"
+                                                (click)="newFeedbackParameters(myJob?.jobId, myJob?.providerId)">
+                                            Leave Feedback {{myJob?.jobId}}
+                                        </button>
+                                        
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    <tbody>
+                </table>
+
+                <!-- A modal window for the existing feedback -->
+                <div *ngIf="visible == 1" id="myModal3" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title text-center">Your Feedback {{existingFeedbackId}}</h4>
+                            </div>
+                            <div class="modal-body">
+                                <clientexistingfeedback [job_id]="existingFeedbackId">
+                                </clientexistingfeedback>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- A modal windows for the new feedback -->
+                <div id="myModal2" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title text-center">Enter Your Feedback</h4>
+                            </div>
+                            <div class="modal-body">
+                                <clientnewfeedback [provider_id] = newFeedbackProviderId
+                                                   [job_id] = newFeedbackJobId
+                                                   (feedbackJobId)=feedbackSubmitedNotification($event)>
+                                </clientnewfeedback>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- pagination buttons -->
+                <div *ngIf="pager.pages && pager.pages.length" class="text-center my-2">
+
+                    <button [class]="{disabled:pager.currentPage === 1}"
+                            (click)="setPage(pager.currentPage - 1)">
+                        Previous
+                    </button>
+                    <button *ngFor="let page of pager.pages"
+                            class="btn btn-default mx-1"
+                            [class.active]="pager.currentPage == page"
+                            (click)="setPage(page)">
+                        {{page}}
+                    </button>
+                    <button [class]="{disabled:pager.currentPage === pager.totalPages}"
+                            (click)="setPage(pager.currentPage + 1)">
+                        Next
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

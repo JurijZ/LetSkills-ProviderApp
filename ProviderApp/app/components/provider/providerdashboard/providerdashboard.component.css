@@ -1,0 +1,31 @@
+#offered {
+    background-color: lightgreen;
+    cursor: pointer;
+    border-radius: 5px/5px;
+}
+
+#accepted {
+    background-color: lightcoral;
+    cursor: pointer;
+    border-radius: 5px/5px;
+}
+
+#applied {
+    background-color: yellow;
+    cursor: pointer;
+    border-radius: 5px/5px;
+}
+
+#completed {
+    background-color: lightskyblue;
+    cursor: pointer;
+    border-radius: 5px/5px;
+}
+
+#job {
+    cursor: pointer;
+}
+
+tr:hover td {
+    background: whitesmoke
+}

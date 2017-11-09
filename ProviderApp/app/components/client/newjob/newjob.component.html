@@ -1,0 +1,249 @@
+
+<h1>Create New Job</h1>
+
+<div>
+    <form [formGroup]="rForm" (ngSubmit)="createNewJob(rForm.value)">
+        <div class="form-container">
+
+            <div class="row" *ngIf="!alowedToPublish">
+                <div class="col-xs-12">
+                    <div class="alert alert-warning text-center">
+                        You have reached the limit of <b>{{maxJobsAllowed}}</b> Published jobs.
+                        Please complete existing ones before publishing a new.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Job Title:</label>
+                <input type="text" class="form-control" formControlName="jobTitle">
+                <div class="alert" *ngIf="!rForm.controls['jobTitle'].valid && rForm.controls['jobTitle'].touched">{{ jobtitleAlert }}</div>
+            </div>
+
+            <div class="form-group">
+                <label>Description:</label>
+                <textarea class="form-control" rows="3" formControlName="jobDescription"></textarea>
+                <div class="alert" *ngIf="!rForm.controls['jobDescription'].valid && rForm.controls['jobDescription'].touched">Please specify a description that's between 5 and 400 characters.</div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-5">
+                        <input type="radio" value="0" formControlName="rate_rb" (change)="onRateSelectionChange()">
+                        <label class="control-label">Fixed Rate (GBP):</label>
+                        <input OnlyNumber="true" formControlName="rateFixed" class="customInput form-control input-sm" />
+                        <div class="alert" *ngIf="!rForm.controls['rateFixed'].valid &&
+                                    rForm.controls['rateFixed'].touched &&
+                                    rForm.controls['rate_rb'].value == 0 ">Enter amount</div>
+                    </div>
+
+                    <div class="col-xs-2"></div>
+
+                    <div class="col-xs-5">
+                        <input type="radio" value="1" formControlName="rate_rb" (change)="onRateSelectionChange()">
+                        <label class="control-label">Rate Per Hour (GBP):</label>
+                        <input OnlyNumber="true" formControlName="ratePerHour" class="customInput form-control input-sm" />
+                        <div class="alert" *ngIf="!rForm.controls['ratePerHour'].valid &&
+                                    rForm.controls['ratePerHour'].touched &&
+                                    rForm.controls['rate_rb'].value == 1 ">Enter amount</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-5">
+                        <input type="radio" value="0" formControlName="duration_rb" (change)="onDurationSelectionChange()">
+                        <label class="control-label">Duration (Days):</label>
+                        <input OnlyNumber="true" formControlName="durationDays" class="customInput form-control input-sm" />
+                        <div class="alert" *ngIf="!rForm.controls['durationDays'].valid &&
+                                    rForm.controls['durationDays'].touched &&
+                                    rForm.controls['duration_rb'].value == 0 ">Enter job duration</div>
+                    </div>
+
+                    <div class="col-xs-2"></div>
+
+                    <div class="col-xs-5">
+                        <input type="radio" value="1" formControlName="duration_rb" (change)="onDurationSelectionChange()">
+                        <label class="control-label">Duration (Hours):</label>
+                        <input OnlyNumber="true" formControlName="durationHours" class="customInput form-control input-sm" />
+                        <div class="alert" *ngIf="!rForm.controls['durationHours'].valid &&
+                                    rForm.controls['durationHours'].touched &&
+                                    rForm.controls['duration_rb'].value == 1 ">Enter job duration</div>
+                    </div>
+                </div>
+            </div>
+
+                
+            <!-- this creates a google map on the page with the given lat/lng from -->
+            <!-- the component as the initial center of the map: -->
+            <div class="form-group">
+                <label class="control-label">Select Job location on the map:</label>
+
+                <agm-map [latitude]="centerLocationLat"
+                         [longitude]="centerLocationLng"
+                         [zoom]="zoom"
+                         [disableDefaultUI]="defaultUI"
+                         [mapDraggable]="dragable"
+                         (mapClick)="mapClicked($event)">
+
+                    <agm-marker [latitude]="locationLat"
+                                [longitude]="locationLng">
+
+                    </agm-marker>
+                </agm-map>
+            </div>
+
+            <!-- Continue with form fields-->
+            <!--<div class="form-group">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <label>Post Code:</label>
+                        <input type="text" class="form-control" formControlName="locationPostCode">
+                        <div class="alert" *ngIf="!rForm.controls['locationPostCode'].valid &&
+                                        rForm.controls['locationPostCode'].touched">Enter jobss location post code</div>
+                    </div>
+
+                    <div class="col-xs-6">
+                        <label>Your Email:</label>
+                        <input type="text" class="form-control" formControlName="contactEmail">
+                        <div class="alert" *ngIf="!rForm.controls['contactEmail'].valid &&
+                                        rForm.controls['contactEmail'].touched">Enter email address</div>
+                    </div>
+                </div>
+            </div>-->
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <label>Primary Telephone number:</label>
+                        <input type="text" class="form-control" formControlName="contactTelephone1">
+                        <div class="alert" *ngIf="!rForm.controls['contactTelephone1'].valid &&
+                                    rForm.controls['contactTelephone1'].touched">Number must start with + and be at least 7 digits</div>
+                    </div>
+
+                    <div class="col-xs-6">
+                        <label>Secondary Telephone number:</label>
+                        <input type="text" class="form-control" formControlName="contactTelephone2">
+                        <div class="alert" *ngIf="!rForm.controls['contactTelephone2'].valid &&
+                                    rForm.controls['contactTelephone2'].touched">Number must start with + and be at least 7 digits</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <label>Select Desired Start date:</label>
+                        <my-date-picker name="plannedStartDate" 
+                                        [options]="myDatePickerOptions"
+                                        [selDate]="startDate"
+                                        (dateChanged)="onStartDateChanged($event)"
+                                        formControlName="plannedStartDate"></my-date-picker>
+                        <div class="alert" *ngIf="!rForm.controls['plannedStartDate'].valid &&
+                                    rForm.controls['plannedStartDate'].touched">Select Start date</div>
+                    </div>
+
+                    <div class="col-xs-6">
+                        <label>Select Desired End date:</label>
+                        <my-date-picker name="plannedFinishDate" 
+                                        [options]="myDatePickerOptions"
+                                        [selDate]="finishDate"
+                                        (dateChanged)="onEndDateChanged($event)"
+                                        formControlName="plannedFinishDate"></my-date-picker>
+                        <div class="alert" *ngIf="!rForm.controls['plannedFinishDate'].valid &&
+                                    rForm.controls['plannedFinishDate'].touched">Select End date</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Select Required skill -->
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <label>Need a Skill in:</label>
+                        <select formControlName="skill" class="skill form-control" (change)="onChangeSkill($event.target.value)">
+                            <!--<option [disabled]="true" [selected]="true">Select required skill</option>-->
+                            <option *ngFor="let skill of allSkills?.skills" [value]="skill">{{ skill }}</option>
+                        </select>
+                        <div class="alert" *ngIf="!rForm.controls['skill'].valid &&
+                                    rForm.controls['skill'].touched">Select a skill</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Uploading files -->
+            <div class="form-group">
+                <label>Upload images (up to 4):</label>
+                <input type="file" class="form-control" multiple id="btnUpload" value="Upload" (change)="fileChange($event)" />
+                <div class="alert" *ngIf="!imageCountValidation">Please upload only up to 4 images.</div>
+            </div>
+
+            <!-- Show uploaded images as thumbnails -->
+            <div class="form-group">
+                <div class="row" id="thumbimages">
+                    <ul>
+                        <li *ngFor="let image of newjob?.Images">
+                            <span class="close" (click)=removeImageFromArray(image)>&times;</span>
+                            <img src="{{image}}"
+                                 class="tn"
+                                 data-toggle="modal"
+                                 data-target="#selectedImageModal2"
+                                 (click)=setSelectedImage(image)>
+                        </li>
+                    </ul>
+
+                    <div class="modal fade" id="selectedImageModal2">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <img *ngIf="selectedImage" src="{{selectedImage}}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Spinner -->
+                    <div class="loader" [hidden]="uploading"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-4">
+                    <input type="radio" value="0" formControlName="create_job_rb" (change)="onCreateSelectionChange()">
+                    <label class="control-label">Create and Publish this Job</label>
+                </div>
+
+                <div class="col-xs-3"></div>
+
+                <div class="col-xs-5">
+                    <input type="radio" value="1" formControlName="create_job_rb" (change)="onCreateSelectionChange()">
+                    <label class="control-label">Create Only (Puts job On Hold)</label>
+                </div>
+            </div>
+
+            <!-- Submit button. ngSubmit call to createNewJob() is defined at the top -->
+            <div class="form-group" *ngIf="alowedToPublish">
+                <div class="row">
+                    <label class="control-label" for="singlebutton"></label>
+                    <div class="text-center">
+                        <input type="submit" id="singlebutton" class="btn btn-primary" value="Submit New Job" [disabled]="!rForm.valid">
+                    </div>
+
+                    <!--  Successfull POST response changes status variable value from -1 to 1 -->
+                    <div *ngIf="status == 1" class="alert alert-success box-msg text-center" role="alert">
+                        <strong>Job is Successfully Created</strong>
+                    </div>
+                    <div *ngIf="status == 0" class="alert alert-danger box-msg text-center" role="alert">
+                        <strong>Job Creation Failed!</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Footer at the bottom of the page to have some contact details etc -->
+<div id="footer">
+    <footer class="container">Let Skills Limited</footer>
+</div>

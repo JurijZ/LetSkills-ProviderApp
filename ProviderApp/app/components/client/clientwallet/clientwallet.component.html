@@ -1,0 +1,27 @@
+
+<p *ngIf="!clientWallet"><em>Loading...</em></p>
+
+<h1>My Wallet</h1>
+
+<div class="container">
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-4">
+        <div class="boxCenterNumber">
+            <span>{{availableAmmount | currency:'GBP':true:'1.0-0'}}</span>
+        </div>
+        Available Amount
+    </div>
+    <div class="col-md-4">
+        <div class="boxCenterNumber">
+            <span>{{blockedAmmount | currency:'GBP':true:'1.0-0'}}</span>
+        </div>
+        Blocked Ammount
+    </div>
+    <div class="col-md-2">
+
+    </div>
+</div>
+
+

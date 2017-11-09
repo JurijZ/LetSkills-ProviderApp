@@ -1,0 +1,44 @@
+﻿@using Microsoft.AspNetCore.Authentication
+@{
+    ViewData["Title"] = "Identity";
+}
+
+<dt>Access token</dt>
+<dd>@await ViewContext.HttpContext.Authentication.GetTokenAsync("access_token")</dd>
+
+<dt>Identity token</dt>
+<dd>@await ViewContext.HttpContext.Authentication.GetTokenAsync("id_token")</dd>
+
+<dt>Refresh token</dt>
+<dd>@await ViewContext.HttpContext.Authentication.GetTokenAsync("refresh_token")</dd>
+
+<dt>api response called with user access token</dt>
+<dd>@ViewData["apiCallUsingUserAccessToken"]</dd>
+
+<dt>api response called with client credentials</dt>
+<dd>@ViewData["clientCredentialsResponse"]</dd>
+
+<h3>Current User Claims </h3>
+<dd>@ViewData["currentuserclaims"]</dd>
+
+<h3>Current User Email </h3>
+<dd>@ViewData["userEmail"]</dd>
+
+
+
+<h3>Data from LetSlikksBackend </h3>
+<dt>api dbusers</dt>
+<dd>@ViewData["dbusers"]</dd>
+
+<h3>User session claims</h3>
+<dl>
+    @foreach (var claim in User.Claims)
+    {
+        <dt>@claim.Type</dt>
+        <dd>@claim.Value</dd>
+    }
+</dl>
+
+<form asp-controller="Identity" asp-action="Logout" method="post">
+    <button type="submit">Logout</button>
+</form>

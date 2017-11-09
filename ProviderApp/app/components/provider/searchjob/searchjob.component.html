@@ -1,0 +1,182 @@
+
+<div class="row" *ngIf="searchState.SearchVisible == 1">
+    <form [formGroup]="rForm" (ngSubmit)="searchJob(rForm.value)">
+        <div class="form-group">
+
+            <!-- this creates a Google Map with the given lat/lng -->
+            <div class="col-xs-10">
+                <label>Zoom into area you wish to search:</label>
+
+                <!--
+        <agm-map [latitude]="centerLocationLat"
+                 [longitude]="centerLocationLng"
+                 [zoom]="zoom"
+                 [disableDefaultUI]="defaultUI"
+                 [mapDraggable]="dragable"
+                 (zoomChange)="mapZoomChanged($event)"
+                 (centerChange)="mapCenterChanged($event)">
+
+            <agm-circle *ngIf="areaSelectable"
+                        [latitude]="locationLat"
+                        [longitude]="locationLng"
+                        [radius]="radius"
+                        [fillColor]="'dodgerblue'"
+                        [circleDraggable]="true"
+                        [editable]="true"
+                        (centerChange)="mapCircleMoved($event)"
+                        (radiusChange)="mapCircleRadius($event)">
+            </agm-circle>
+        </agm-map> -->
+
+                <agm-map *ngIf="showMap"
+                         #gm
+                         [latitude]="centerLocationLat"
+                         [longitude]="centerLocationLng"
+                         [zoom]="zoom"
+                         [disableDefaultUI]="defaultUI"
+                         [mapDraggable]="dragable"
+                         (zoomChange)="mapZoomChanged($event)"
+                         (centerChange)="mapCenterChanged($event)">
+
+                    <agm-marker *ngFor="let job of searchResults.Results"
+                                (markerClick)="gm.lastOpen?.close(); gm.lastOpen = infoWindow; clickedMarker(job)"
+                                [latitude]="job.locationLat"
+                                [longitude]="job.locationLng">
+                        <agm-info-window #infoWindow>
+                            <strong>{{job.jobTitle}}</strong>
+                        </agm-info-window>
+                    </agm-marker>
+
+                </agm-map>
+            </div>
+
+
+            <!-- Select Required Skill -->
+            <div class="col-xs-2">
+                <label>I'm skilled in:</label>
+                <select [(ngModel)]="selectedSkill" formControlName="skill" class="skill form-control" (change)="onChangeSkill($event.target.value)">
+                    <option *ngFor="let skill of allSkills?.skills" [value]="skill">{{ skill }}</option>
+                </select>
+                <div class="alert" *ngIf="!rForm.controls['skill'].valid &&
+                                rForm.controls['skill'].touched">Select a skill</div>
+            
+
+            <!-- Select Date range -->
+            
+                <label>I'm available:</label>
+                <select [(ngModel)]="selectedDuration" formControlName="duration" class="skill form-control" (change)="onChangeDateRange($event.target.value)">
+                    <!--<option [disabled]="true" [selected]="true">Select required skill</option>-->
+                    <option *ngFor="let duration of durations" [value]="duration.id">{{ duration.name }}</option>
+                </select>
+                <div class="alert" *ngIf="!rForm.controls['duration'].valid &&
+                                rForm.controls['duration'].touched">Select duation</div>
+            
+
+            <!-- Submit button. ngSubmit call to searchJob() is defined at the top -->
+            
+                <label></label>
+                <input type="submit" class="btn btn-md btn-primary btn-block" value="Search">
+            </div>
+        </div>
+
+        <!--<div class="form-group">
+            <label>Keywords:</label>
+            <input type="text" class="form-control" formControlName="keywords" [(ngModel)]="enteredKeywords">
+        </div>-->
+            
+    </form>    
+</div>
+
+<!-- Vertical space -->
+<div class="col-xs-12" style="height:10px;"></div>
+
+<!--  Failed POST response changes status variable value from -1 to 0 -->
+<div class="row" *ngIf="status == 0">    
+    <div  class="alert alert-danger box-msg text-center" role="alert">
+        <strong>Ups, Job Search Failed, please try again.</strong>
+    </div>
+</div> 
+
+<!-- The job of the selected Marker-->
+<div class="row" *ngIf="markedJob">
+    <div class="col-xs-10 form-group">
+        <div *ngIf="markedJob?.applied == 1" class="alert alert-success box-msg text-center" role="alert">
+            <strong>You Applied to this job </strong>
+        </div>
+        <table class="table table-sm table-striped">
+            <colgroup>
+                <col class="col-xs-2">
+                <col class="col-xs-5">
+            </colgroup>
+            <tbody>
+                <tr> <th>Application Status: </th> <td>{{ markedJob?.applied }}</td> </tr>
+                <!--<tr> <th>Job State: </th> <td>{{ stateIdToName(markedJob?.jobState) }}</td> </tr>
+                <tr> <th>ID:</th> <td>{{ markedJob?.id || 'Loading Data...' }}</td> </tr>-->
+                <tr> <th>Job Title: </th> <td>{{ markedJob?.jobTitle }}</td> </tr>
+                <tr> <th>Description: </th> <td>{{ markedJob?.jobDescription }}</td> </tr>
+                <tr *ngIf="markedJob?.ratePerHour;"> <th>Rate GBP (Per Hour): </th> <td>{{ markedJob?.ratePerHour }}</td> </tr>
+                <tr *ngIf="markedJob?.rateFixed;"> <th>Rate GBP (Fixed): </th> <td>{{ markedJob?.rateFixed }}</td> </tr>
+                <tr *ngIf="markedJob?.durationDays;"> <th>Duration (Days): </th> <td>{{ markedJob?.durationDays }}</td> </tr>
+                <tr *ngIf="markedJob?.durationHours;"> <th>Duration (Hours): </th> <td>{{ markedJob?.durationHours }}</td> </tr>
+                <tr> <th>Required Skill: </th> <td>{{ markedJob?.skill }}</td> </tr>
+                <tr> <th>Planned Start Date: </th> <td>{{ markedJob?.plannedStartDate | date: 'dd-MMM-yyyy' }}</td> </tr>
+                <tr> <th>Planned Finish Date: </th> <td>{{ markedJob?.plannedFinishDate | date: 'dd-MMM-yyyy' }}</td> </tr>
+            </tbody>
+        </table>
+        <div class="container" id="thumbimages">
+            <ul>
+                <li *ngFor="let image of markedJob?.images">
+                    <img src="{{image}}"
+                            class="tn"
+                            data-toggle="modal"
+                            data-target="#selectedImageModal2"
+                            (click)=setSelectedImage(image)>
+                </li>
+            </ul>
+
+            <div class="modal fade" id="selectedImageModal2">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <img *ngIf="selectedImage" src="{{selectedImage}}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Application Button -->
+<div class="row" *ngIf="markedJob">
+    <div class="col-xs-10">
+        <div *ngIf="!phoneVerified && markedJob?.applied != 1" class="alert alert-warning box-msg text-center" role="alert">
+            <strong>To apply Please verify your telephone number</strong>
+            <button class="float-center btn btn-sm btn-primary" (click)="navigateToTheProfile()">
+                Go to the Profile
+            </button>
+        </div>
+        <!-- Hide Apply button if user already applied or phone number is not verified -->
+        <div *ngIf="phoneVerified && markedJob?.applied != 1" class="text-center">
+            <button class="float-right btn btn-sm btn-primary" (click)="applyToJob(markedJob?.id)">Apply to this job</button>
+        </div>
+
+        <!--  Failed POST response changes status variable value from -1 to 0 -->
+        <div *ngIf="applicationstatus == 1" class="alert alert-success box-msg text-center" role="alert">
+            <strong>Application is Successfully completed</strong>
+        </div>
+        <div *ngIf="applicationstatus == 0" class="alert alert-danger box-msg text-center" role="alert">
+            <strong>Application Failed! Try again later</strong>
+        </div>
+    </div>
+    <div class="col-xs-2"></div>
+</div>
+
+
+
+<!-- Footer at the bottom of the page to have some contact details etc -->
+<div id="footer" class="row">
+    <div class="col-xs-12">
+        <footer class="container">Let Skills Limited</footer>
+    </div>
+</div>

@@ -1,0 +1,169 @@
+<h1>Edit My Profile</h1>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-8">
+            <form [formGroup]="rForm" (ngSubmit)="editProviderProfile(rForm.value)">
+                <div class="row">
+                    <div class="form-group">
+                        <label>Name:</label>
+                        <input type="text" class="form-control" formControlName="name">
+                        <div class="alert" *ngIf="!rForm.controls['name'].valid &&
+                                                rForm.controls['name'].touched">{{ nameAlert }}</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Surname:</label>
+                        <input type="text" class="form-control" formControlName="surname">
+                        <div class="alert" *ngIf="!rForm.controls['surname'].valid &&
+                                                rForm.controls['surname'].touched">Enter your surname</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Your Email:</label>
+                        <input type="text" class="form-control" formControlName="contactEmail">
+                        <div class="alert" *ngIf="!rForm.controls['contactEmail'].valid &&
+                                                rForm.controls['contactEmail'].touched">Enter valid email address</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Primary Telephone number:</label>
+                        <input type="text" class="form-control" formControlName="contactTelephone1">
+                        <div class="alert" *ngIf="!rForm.controls['contactTelephone1'].valid &&
+                                                       rForm.controls['contactTelephone1'].touched">Number must start with + and be at least 7 numbers</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Secondary Telephone number:</label>
+                        <input type="text" class="form-control" formControlName="contactTelephone2">
+                        <div class="alert" *ngIf="!rForm.controls['contactTelephone2'].valid &&
+                                                       rForm.controls['contactTelephone2'].touched">Number must start with + and be at least 7 numbers</div>
+                    </div>
+
+                    <!--<div class="form-group">
+                        <label>Do you have a car?:</label>
+                        <input type="text" class="form-control" formControlName="haveAcar">
+                        <div class="alert" *ngIf="!rForm.controls['haveAcar'].valid &&
+                                                       rForm.controls['haveAcar'].touched">Do you have a car?</div>
+                    </div>-->
+                    
+                    <div class="form-group">
+                        <label for="sel1">Do you have a car?:</label>
+                        <select class="form-control" id="sel1" (change)="selectHaveACar($event.target.value)">
+                            <option *ngFor="let haveAcarString of haveAcarOptions">
+                                {{haveAcarString}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <!-- this creates a google map on the page with the given lat/lng from -->
+                    <!-- the component as the initial center of the map: -->
+                    <div class="form-group">
+                        <label class="control-label">Select your location on the map:</label>
+
+                        <agm-map [latitude]="centerLocationLat"
+                                 [longitude]="centerLocationLng"
+                                 [disableDefaultUI]="defaultUI"
+                                 [mapDraggable]="dragable"
+                                 [zoom]="zoom"
+                                 (mapClick)="mapClicked($event)">
+
+                            <agm-marker [latitude]="locationLat"
+                                        [longitude]="locationLng">
+
+                            </agm-marker>
+                        </agm-map>
+                    </div>
+                    
+                </div>
+
+                <!-- SUBMIT button. ngSubmit call to createNewJob() is defined at the top -->
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <label class="control-label" for="singlebutton"></label>
+                        <div class="text-center">
+                            <input type="submit" id="singlebutton" class="btn btn-primary" value="Save Changes" [disabled]="!rForm.valid">
+                        </div>
+
+                        <!--  Successfull POST response changes status variable value from -1 to 1 -->
+                        <div *ngIf="status == 1" class="alert alert-success box-msg text-center" role="alert">
+                            <strong>Your Profile is Successfully Updated</strong>
+                        </div>
+                        <div *ngIf="status == 0" class="alert alert-danger box-msg text-center" role="alert">
+                            <strong>Profile Update Failed!</strong>
+                        </div>
+
+                    </div>
+                </div>
+
+            </form>
+         </div>
+
+        <!--  Profile Image section -->
+        <div class="col-md-4 form-group" align="center">
+            <div id="thumbimages">
+                <div *ngIf="this.providerProfile?.profileImageUrl">
+                    <span class="close" (click)=removeProfileImage()>&times;</span>
+                    <img src="{{this.providerProfile?.profileImageUrl}}"
+                            class="tn"
+                            data-toggle="modal"
+                            data-target="#selectedImageModal2"
+                            (click)=setSelectedImage()>
+                </div>
+                <div *ngIf="!this.providerProfile?.profileImageUrl">
+                    <img src="https://s3.eu-west-2.amazonaws.com/images.angular4.test1/defaults/DefaultProfilePicture.PNG"
+                            class="tn">
+                </div>
+
+                <div>
+                    <input type="file" class="form-control" id="btnUpload" value="Upload" (change)="fileChange($event)" />
+                    <div class="alert" *ngIf="!imageCountValidation">Please upload only 1 image</div>
+                </div>
+
+                <div class="modal fade" id="selectedImageModal2">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <img *ngIf="selectedImage" src="{{selectedImage}}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spinner -->
+                <div class="loader" [hidden]="uploading"></div>
+            </div>
+
+            <!-- List of Skills -->
+            <div class="form-group">
+                <label>My Skills:</label>
+                <div class="row">
+                    <ul class="list-unstyled">
+                        <li *ngFor="let skill of providerProfile?.skills" (click)="removeSkill(skill)">
+                            {{skill}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-block dropdown-toggle" data-toggle="dropdown">Add a Skill <span class="caret"></span></button>
+                <ul class="dropdown-menu scroll-menu" role="menu">
+                    <li *ngFor="let skill of allSkills?.skills" (click)="addNewSkill(skill)">
+                        {{skill}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Footer at the bottom of the page to have some contact details etc -->
+<div id="footer" class="form-group">
+    <div class="col-md-12">
+        <footer class="container">Let Skills Limited</footer>
+    </div>
+</div>
