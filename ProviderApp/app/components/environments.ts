@@ -9,6 +9,7 @@ export class EnvironmentConfig {
     public static let_skills_backend_url = 'http://localhost:5004/api/';
 }
 
+
 // Prod environment
 //export class EnvironmentConfig {
 //  public static stsServer = 'http://localhost:5000';
