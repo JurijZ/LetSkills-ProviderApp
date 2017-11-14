@@ -14,16 +14,17 @@
             <ul class='nav navbar-nav'>
                 <li [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/home']"><span class='glyphicon glyphicon-home'></span>Home</a>
-                </li>                
-                <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/providerdashboard']"><span class='glyphicon glyphicon-education'></span>Provider - Dashboard</a>
                 </li>
                 <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/providerprofile']"><span class='glyphicon glyphicon-education'></span>Provider - My Profile</a>
+                    <a [routerLink]="['/searchjob']"><span class='glyphicon glyphicon-education'></span>Job Search</a>
                 </li>
                 <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/searchjob']"><span class='glyphicon glyphicon-education'></span>Provider - Job Search</a>
+                    <a [routerLink]="['/providerdashboard']"><span class='glyphicon glyphicon-education'></span>Dashboard</a>
                 </li>
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/providerprofile']"><span class='glyphicon glyphicon-education'></span>My Profile</a>
+                </li>
+                
                 <!--<li>
                     <a href="http://localhost:5002/identity"><span class='glyphicon glyphicon-apple'></span> Identity Ext</a>
                 </li>
