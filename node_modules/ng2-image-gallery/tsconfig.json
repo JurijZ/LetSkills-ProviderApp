@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "es2015",
+    "target": "es5",
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "outDir": "dist",
+    "moduleResolution": "node",
+    "declaration": true,
+    "stripInternal": true,
+    "skipLibCheck": true,
+    "paths": {
+      "@angular/core": ["node_modules/@angular/core"],
+      "@angular/material": ["node_modules/@angular/material"],
+      "@angular/common": ["node_modules/@angular/common"],
+      "ng2-dragula": ["node_modules/ng2-dragula"]
+    },
+    "lib": [
+      "es2015", 
+      "dom"
+    ]
+  },
+  "files": [
+    "ng2-image-gallery.ts"
+  ],
+  "angularCompilerOptions": {
+    "strictMetadataEmit": true
+  }
+}

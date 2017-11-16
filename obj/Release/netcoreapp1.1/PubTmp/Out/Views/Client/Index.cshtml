@@ -1,0 +1,77 @@
+<style>
+    .loadingdiv {
+        background: rgba(255, 255, 255, .85);
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        /* bring your own prefixes */
+        transform: translate(-50%, -50%);
+    }
+
+    .loadingdiv span {
+        display: inline-block;
+        vertical-align: middle;
+        width: 20px;
+        height: 20px;
+        margin: 2px;
+        border-radius: 50%;
+        z-index: 10;
+        -webkit-animation: loading .4s infinite alternate;
+        background: #4285f4;
+    }
+
+    @@-webkit-keyframes loading {
+    0% {
+        -webkit-transform: scale(0);
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+    }
+}
+
+    .loadingdiv span:nth-of-type(2) {
+        background: #db4437;
+        -webkit-animation-delay: .2s;
+    }
+
+    .loadingdiv span:nth-of-type(3) {
+        background: #f4b400;
+        -webkit-animation-delay: .4s;
+    }
+
+    .loadingdiv span:nth-of-type(4) {
+        background: #0f9d58;
+        -webkit-animation-delay: .6s;
+    }
+
+</style>
+
+
+@{
+    ViewData["Title"] = "Client Page";
+}
+
+<!-- This is the original statement, replaced with the below (this is to fix "Call to Node module failed error")
+<app asp-prerender-module="ClientApp/dist/main-server">Loading...</app>
+-->
+
+<app asp-ng2-prerender-module="ClientApp/dist/main-server">
+
+    <!-- Loading balls -->
+    <div class="loadingdiv">
+        Loading
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+</app>
+
+<script src="~/distClient/vendor.js" asp-append-version="true"></script>
+@section scripts {
+    <script src="~/distClient/main-client.js" asp-append-version="true"></script>
+}
+
+

@@ -1,0 +1,11 @@
+D:\LetSkillsProjects\FrontEnd\ProviderApp\bin\Debug\netcoreapp1.1\ProviderApp.deps.json
+D:\LetSkillsProjects\FrontEnd\ProviderApp\bin\Debug\netcoreapp1.1\ProviderApp.runtimeconfig.json
+D:\LetSkillsProjects\FrontEnd\ProviderApp\bin\Debug\netcoreapp1.1\ProviderApp.runtimeconfig.dev.json
+D:\LetSkillsProjects\FrontEnd\ProviderApp\bin\Debug\netcoreapp1.1\ProviderApp.dll
+D:\LetSkillsProjects\FrontEnd\ProviderApp\bin\Debug\netcoreapp1.1\ProviderApp.pdb
+D:\LetSkillsProjects\FrontEnd\ProviderApp\obj\Debug\netcoreapp1.1\ProviderApp.csprojResolveAssemblyReference.cache
+D:\LetSkillsProjects\FrontEnd\ProviderApp\obj\Debug\netcoreapp1.1\ProviderApp.AssemblyInfo.cs
+D:\LetSkillsProjects\FrontEnd\ProviderApp\obj\Debug\netcoreapp1.1\ProviderApp.dll
+D:\LetSkillsProjects\FrontEnd\ProviderApp\obj\Debug\netcoreapp1.1\ProviderApp.pdb
+D:\LetSkillsProjects\Frontend\ProviderApp\obj\Debug\netcoreapp1.1\ProviderApp.csproj.CoreCompileInputs.cache
+D:\LetSkillsProjects\Frontend\ProviderApp\obj\Debug\netcoreapp1.1\ProviderApp.AssemblyInfoInputs.cache
