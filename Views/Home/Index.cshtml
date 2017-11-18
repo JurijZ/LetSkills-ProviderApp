@@ -14,6 +14,10 @@
         background: #ff9900; /**/
     }
 
+        .btn-xlarge:hover {
+            background: #ffAA22; /**/
+        }
+
     .btn1:hover {
         background: #3cb0fd;
         background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
@@ -22,8 +26,8 @@
         background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
         background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
         text-decoration: none;
-    }    
-    
+    }
+
     .boxCenterNumber {
         height: 120px;
         width: 200px;
@@ -91,28 +95,37 @@
         display: inline-block;
         float: left;
     }
-    
-
 </style>
 
 <div class="row">
     <div class="col-md-10 col-md-offset-1 title-background">
         <div class="col-md-6 text-left">
-            <h2 class="title-colour">Let Skills (beta)</h2>
+            <h2 class="title-colour">Let Skills</h2>
+            @*<h2>
+                    <font color=#FFOOOO>L</font>
+                    <font color=#00FFOO>e</font>
+                    <font color=#OOOOFF>t</font>
+                    <font color=#FFOOOO> </font>
+                    <font color=#FFOOOO>S</font>
+                    <font color=#00FFOO>k</font>
+                    <font color=#OOOOFF>i</font>
+                    <font color=#FFOOOO>l</font>
+                    <font color=#00FFOO>l</font>
+                    <font color=#OOOOFF>s</font>
+                </h2>*@
         </div>
         <div class="col-md-6 text-right">
             <h2>
                 <input type="button"
                        class="btn btn-warning"
                        value="Register Today"
-                       onclick="@("window.location.href='http://www.usefullskills.com/identity/Account/Register'");">
+                       onclick="@("window.location.href='http://localhost:5000/Account/Register'");">
             </h2>
         </div>
     </div>
 </div>
-
-<div >
-    <div class="row" >
+<div>
+    <div class="row">
         <div class="col-md-10 col-md-offset-1 text-center">
             <div class="row">
                 <div class="col-md-2">
@@ -159,7 +172,7 @@
         <div class="col-md-1"></div>
         <div class="col-md-2 text-center">
             <h4 class="howitworks">Post a job</h4>
-            Deifine a skill you need, location, time and how much you are willing to pay.
+            Deifine a skill you search, location and when you need it.
         </div>
         <div class="col-md-2 text-center">
             <h4 class="howitworks">Apply</h4>
@@ -167,7 +180,7 @@
         </div>
         <div class="col-md-2 text-center">
             <h4 class="howitworks">Offer</h4>
-            Choose the best applicant for your work and make an offer.
+            Choose the best applicant for the job and make an offer.
         </div>
         <div class="col-md-2 text-center">
             <h4 class="howitworks">Work</h4>
@@ -183,7 +196,7 @@
 
 <div calss="row">
     <div class="col-md-10 col-md-offset-1 text-center footer-background">
-            <h5 class="footer-colour"></h5>
+        <h5 class="footer-colour"></h5>
     </div>
 </div>
 
