@@ -1,5 +1,5 @@
 @{
-    ViewData["Title"] = "Front Page";
+    ViewData["Title"] = "Let Skills";
 }
 
 <style>
@@ -95,6 +95,10 @@
         display: inline-block;
         float: left;
     }
+
+    .list-group li {
+        border: 0 none;
+    }
 </style>
 
 <div class="row">
@@ -140,7 +144,7 @@
                                onclick="@("window.location.href='" + @Url.Action("Index", "Client") + "'");">
 
                         <div class="fsize">
-                            Advertise work and find the right person for you.
+                            Advertise a job and find the right person for you.
                         </div>
 
                     </div>
@@ -157,7 +161,7 @@
                     </div>
                 </div>
                 <div class="col-md-2">
-
+                    <p style="color:darkorange">and make 2 offers for free</p>
                 </div>
             </div>
         </div>
@@ -191,6 +195,12 @@
             Evaluate the quality of the completed work and leave a feedback.
         </div>
         <div class="col-md-1"></div>
+    </div>
+</div>
+
+<div calss="row">
+    <div class="col-md-10 col-md-offset-1 text-center">
+        @Html.Partial("SkillList.cshtml")
     </div>
 </div>
 
