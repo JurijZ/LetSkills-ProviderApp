@@ -18,15 +18,20 @@
             background: #ffAA22; /**/
         }
 
-    .btn1:hover {
-        background: #3cb0fd;
-        background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-        background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-        background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-        background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-        background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-        text-decoration: none;
+    .btn-normal {
+        padding: 8px 14px;
+        font-size: 15px;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        text-align: center;
+        display: inline-block;
+        background: #ff9900; /**/
     }
+
+        .btn-normal:hover {
+            background: #ffAA22; /**/
+        }
 
     .boxCenterNumber {
         height: 120px;
@@ -43,7 +48,7 @@
     }
 
     .title-background {
-        background-color: #1e94d4;
+        background-color: #073281;
     }
 
     .title-colour {
@@ -51,7 +56,7 @@
     }
 
     .footer-background {
-        background-color: #2980b9;
+        background-color: #073281;
     }
 
     .footer-colour {
@@ -68,7 +73,7 @@
     #wrap {
         /*margin-top: 20vh;
         margin-bottom: 20vh;*/
-        padding-top: 20vh;
+        padding-top: 16vh;
         padding-bottom: 20vh;
     }
 
@@ -99,38 +104,52 @@
     .list-group li {
         border: 0 none;
     }
+
+    .logo > img, .logo > h2 {
+        display: inline-block;
+    }
+
+    .img-valign {
+        vertical-align: middle;
+        margin-bottom: 1em;
+        margin-left: 1em;
+    }
 </style>
 
-<div class="row">
-    <div class="col-md-10 col-md-offset-1 title-background">
-        <div class="col-md-6 text-left">
-            <h2 class="title-colour">Let Skills</h2>
-            @*<h2>
-                    <font color=#FFOOOO>L</font>
-                    <font color=#00FFOO>e</font>
-                    <font color=#OOOOFF>t</font>
-                    <font color=#FFOOOO> </font>
-                    <font color=#FFOOOO>S</font>
-                    <font color=#00FFOO>k</font>
-                    <font color=#OOOOFF>i</font>
-                    <font color=#FFOOOO>l</font>
-                    <font color=#00FFOO>l</font>
-                    <font color=#OOOOFF>s</font>
-                </h2>*@
-        </div>
-        <div class="col-md-6 text-right">
-            <h2>
-                <input type="button"
-                       class="btn btn-warning"
-                       value="Register Today"
-                       onclick="@("window.location.href='http://localhost:5000/Account/Register'");">
-            </h2>
+
+<div style="background:url(dist/frontpage.jpg);background-size:cover;background-position:center center;position:relative;">
+    <div style="position:absolute;z-index:1;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.4);"></div>
+    <div class="row" style="position:relative;z-index:2;color:#fff">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-10 text-left logo">
+                    <img class="img-valign" src="dist/ukflag.png" height="42" width="42"></img>
+                    <h2 class="title-colour" style="margin-left:1em">Person to Person job board</h2>
+                </div>
+                <div class="col-md-2 text-center">
+                    <h2>
+                        <input type="button"
+                               class="btn btn-warning btn-normal"
+                               value="Register Today"
+                               onclick="@("window.location.href='http://localhost:5000/Account/Register'");">
+                    </h2>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-<div>
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1 text-center">
+    <div class="row" style="position:relative;z-index:2;color:#fff">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-10 text-left">
+                </div>
+                <div class="col-md-2 text-center">
+                    <p style="color:white">and make 2 offers for free</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="position:relative;z-index:2;color:#fff">
+        <div class="col-md-12 text-center">
             <div class="row">
                 <div class="col-md-2">
 
@@ -143,7 +162,7 @@
                                value="Advertiser"
                                onclick="@("window.location.href='" + @Url.Action("Index", "Client") + "'");">
 
-                        <div class="fsize">
+                        <div class="fsize" style="margin-top:1em">
                             Advertise a job and find the right person for you.
                         </div>
 
@@ -155,13 +174,13 @@
                                value="Job Seeker"
                                onclick="@("window.location.href='" + @Url.Action("Index", "Provider") + "'");">
 
-                        <div class="fsize">
+                        <div class="fsize" style="margin-top:1em">
                             Search for the jobs and share your skills with people.
                         </div>
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <p style="color:darkorange">and make 2 offers for free</p>
+
                 </div>
             </div>
         </div>
@@ -169,10 +188,10 @@
 </div>
 
 <div class="row">
-    <div class="col-md-10 col-md-offset-1 text-center" style="background-color: #eee;">
-        <h4>How it works?:</h4>
+    <div class="col-md-10 col-md-offset-1 text-center" style="background-color: #fff;">
+        <h4 style="margin-top:2em">How it works?</h4>
     </div>
-    <div class="col-md-10 col-md-offset-1" style="background-color: #eee;">
+    <div class="col-md-10 col-md-offset-1" style="background-color: #fff;">
         <div class="col-md-1"></div>
         <div class="col-md-2 text-center">
             <h4 class="howitworks">Post a job</h4>
@@ -198,15 +217,15 @@
     </div>
 </div>
 
-<div calss="row">
+<div calss="row" style="margin-top:1em">
     <div class="col-md-10 col-md-offset-1 text-center">
         @Html.Partial("SkillList.cshtml")
     </div>
 </div>
 
 <div calss="row">
-    <div class="col-md-10 col-md-offset-1 text-center footer-background">
-        <h5 class="footer-colour"></h5>
+    <div class="col-md-12">
+        <h4>Let Skills</h4>
     </div>
 </div>
 
