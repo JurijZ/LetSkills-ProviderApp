@@ -2,6 +2,12 @@
     ViewData["Title"] = "Let Skills";
 }
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.carousel').carousel({ interval: 7000 });
+    });
+</script>
+
 <style>
     .btn-xlarge {
         padding: 18px 28px;
@@ -114,73 +120,196 @@
         margin-bottom: 1em;
         margin-left: 1em;
     }
+
+    /* keeps this behind all content */
+    .carousel {
+        z-index: 0;
+    }
+
+
+    .carousel-fade .carousel-inner .item {
+        opacity: 0;
+        transition-property: opacity;
+    }
+
+    .carousel-fade .carousel-inner .active {
+        opacity: 1;
+    }
+
+        .carousel-fade .carousel-inner .active.left,
+        .carousel-fade .carousel-inner .active.right {
+            left: 0;
+            opacity: 0;
+            z-index: 2;
+        }
+
+    .carousel-fade .carousel-inner .next.left,
+    .carousel-fade .carousel-inner .prev.right {
+        opacity: 1;
+    }
+
+    .carousel-fade .carousel-control {
+        z-index: 1;
+    }
+
+    @@media all and (transform-3d), (-webkit-transform-3d) {
+        .carousel-fade .carousel-inner > .item.next,
+        .carousel-fade .carousel-inner > .item.active.right {
+            opacity: 0;
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+        }
+
+        .carousel-fade .carousel-inner > .item.prev,
+        .carousel-fade .carousel-inner > .item.active.left {
+            opacity: 0;
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+        }
+
+            .carousel-fade .carousel-inner > .item.next.left,
+            .carousel-fade .carousel-inner > .item.prev.right,
+            .carousel-fade .carousel-inner > .item.active {
+                opacity: 1;
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+    }
+
+    .carousel .item {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-transition: opacity 3s;
+        -moz-transition: opacity 3s;
+        -ms-transition: opacity 3s;
+        -o-transition: opacity 3s;
+        transition: opacity 3s;
+    }
+
+    .carousel .one {
+        background: url(dist/frontpage1.jpg);
+        background-position: center center;
+        background-size: cover;
+        -moz-background-size: cover;
+    }
+
+    .carousel .two {
+        background: url(dist/frontpage2.jpg);
+        background-position: center center;
+        background-size: cover;
+        -moz-background-size: cover;
+    }
+
+    .carousel .three {
+        background: url(dist/frontpage3.jpg);
+        background-position: center center;
+        background-size: cover;
+        -moz-background-size: cover;
+    }
+
+    .carousel .four {
+        background: url(dist/frontpage4.jpg);
+        background-position: center center;
+        background-size: cover;
+        -moz-background-size: cover;
+    }
+
+    .carousel .five {
+        background: url(dist/frontpage5.jpg);
+        background-position: center center;
+        background-size: cover;
+        -moz-background-size: cover;
+    }
+
+    .carousel .active.left {
+        left: 0;
+        opacity: 0;
+        z-index: 2;
+    }
+
+    .car1 {
+        background: url(dist/frontpage1.jpg);
+        background-size: cover;
+        background-position: center center;
+        position: relative;
+    }
 </style>
 
+<div>
+    <div id="myCarousel" class="carousel slide carousel-fade">
+        <div class="carousel-inner">
+            <div class="item one"></div>
+            <div class="item two"></div>
+            <div class="item three"></div>
+            <div class="active item four"></div>
+            <div class="item five"></div>
 
-<div style="background:url(dist/frontpage.jpg);background-size:cover;background-position:center center;position:relative;">
-    <div style="position:absolute;z-index:1;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.4);"></div>
-    <div class="row" style="position:relative;z-index:2;color:#fff">
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-md-10 text-left logo">
-                    <img class="img-valign" src="dist/ukflag.png" height="42" width="42"></img>
-                    <h2 class="title-colour" style="margin-left:1em">Person to Person job board</h2>
-                </div>
-                <div class="col-md-2 text-center">
-                    <h2>
-                        <input type="button"
-                               class="btn btn-warning btn-normal"
-                               value="Register Today"
-                               onclick="@("window.location.href='http://localhost:5000/Account/Register'");">
-                    </h2>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row" style="position:relative;z-index:2;color:#fff">
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-md-10 text-left">
-                </div>
-                <div class="col-md-2 text-center">
-                    <p style="color:white">and make 2 offers for free</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row" style="position:relative;z-index:2;color:#fff">
-        <div class="col-md-12 text-center">
-            <div class="row">
-                <div class="col-md-2">
-
-                </div>
-                <div class="col-md-8" id="wrap">
-                    <div class="col-md-6 text-center">
-
-                        <input type="button"
-                               class="btn btn-warning btn-xlarge"
-                               value="Advertiser"
-                               onclick="@("window.location.href='" + @Url.Action("Index", "Client") + "'");">
-
-                        <div class="fsize" style="margin-top:1em">
-                            Advertise a job and find the right person for you.
+            <div style="position:absolute;z-index:3;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.4);"></div>
+            <div class="row" style="position:relative;z-index:4;color:#fff">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-10 text-left logo">
+                            <img class="img-valign" src="dist/ukflag.png" height="42" width="42">
+                            <h2 class="title-colour" style="margin-left:0.5em">Person to Person job board</h2>
                         </div>
-
-                    </div>
-                    <div class="col-md-6 text-center">
-
-                        <input type="button"
-                               class="btn btn-warning btn-xlarge"
-                               value="Job Seeker"
-                               onclick="@("window.location.href='" + @Url.Action("Index", "Provider") + "'");">
-
-                        <div class="fsize" style="margin-top:1em">
-                            Search for the jobs and share your skills with people.
+                        <div class="col-md-2 text-center">
+                            <h2>
+                                <input type="button"
+                                       class="btn btn-warning btn-normal"
+                                       value="Register Today"
+                                       onclick="@("window.location.href='http://localhost:5000/Account/Register'");">
+                            </h2>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2">
+            </div>
+            <div class="row" style="position:relative;z-index:4;color:#fff">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-10 text-left">
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <p style="color:white">and make 2 offers for free</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="position:relative;z-index:4;color:#fff">
+                <div class="col-md-12 text-center">
+                    <div class="row">
+                        <div class="col-md-2">
 
+                        </div>
+                        <div class="col-md-8" id="wrap">
+                            <div class="col-md-6 text-center">
+
+                                <input type="button"
+                                       class="btn btn-warning btn-xlarge"
+                                       value="Advertiser"
+                                       onclick="@("window.location.href='" + @Url.Action("Index", "Client") + "'");">
+
+                                <div class="fsize" style="margin-top:1em">
+                                    Advertise a job and find the right person for you.
+                                </div>
+
+                            </div>
+                            <div class="col-md-6 text-center">
+
+                                <input type="button"
+                                       class="btn btn-warning btn-xlarge"
+                                       value="Job Seeker"
+                                       onclick="@("window.location.href='" + @Url.Action("Index", "Provider") + "'");">
+
+                                <div class="fsize" style="margin-top:1em">
+                                    Search for the jobs and share your skills with people.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
