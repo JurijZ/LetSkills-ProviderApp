@@ -1,4 +1,4 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject, Input, HostListener } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -14,6 +14,14 @@ import { AuthService } from '../../services/auth.service';
 })
 
 export class ProviderJobDetailsComponent {
+
+    // To show warning message if Browser Reload button clicked
+    @HostListener('window:beforeunload', ['$event'])
+    doSomething($event) {
+        if (true) {
+            $event.returnValue = 'You are about to Exit web site';
+        }
+    }
     
     public url: string;
     public url2: string;

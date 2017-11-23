@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Router } from '@angular/router';
@@ -15,6 +15,14 @@ import { ProviderProfileService } from '../../services/providerprofile.service';
     styleUrls: ['./searchjob.component.css']
 })
 export class SearchJobComponent implements OnInit {
+
+    // To show warning message if Browser Reload button clicked
+    @HostListener('window:beforeunload', ['$event'])
+    doSomething($event) {
+        if (true) {
+            $event.returnValue = 'You are about to Exit web site';
+        }
+    }
 
     rForm: FormGroup;
     post: any;                     // A property for our submitted form

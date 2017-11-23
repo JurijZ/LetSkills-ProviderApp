@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -18,6 +18,14 @@ import { IMyDpOptions, IMyDateModel, IMyDate } from 'mydatepicker';
 })
 
 export class ProviderEditProfileComponent {
+
+    // To show warning message if Browser Reload button clicked
+    @HostListener('window:beforeunload', ['$event'])
+    doSomething($event) {
+        if (true) {
+            $event.returnValue = 'You are about to Exit web site';
+        }
+    }
     
     public url: string;
     public url3: string;

@@ -1,10 +1,10 @@
 
 <div *ngIf="!isAuthorized">
-    <h1>Login to access personal area: </h1>
+    <h1>Login to access personal area </h1>
     <button type="button" class="btn btn-primary" (click)="login()">Login</button>
 </div>
 
 <div *ngIf="isAuthorized">
-    <h1>Logout to leave personal area: </h1>
+    <h1>Logout to leave personal area </h1>
     <button type="button" class="btn btn-primary" (click)="logout()">Logout</button>
 </div>

@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "4314c43592b5846d2bf8"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "04f1a0e9b140846af192"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -11615,6 +11615,12 @@ var ProviderEditProfileComponent = (function () {
             }
         });
     }
+    // To show warning message if Browser Reload button clicked
+    ProviderEditProfileComponent.prototype.doSomething = function ($event) {
+        if (true) {
+            $event.returnValue = 'You are about to Exit web site';
+        }
+    };
     // Car selection method
     ProviderEditProfileComponent.prototype.selectHaveACar = function (haveAcarString) {
         if (haveAcarString == "Yes") {
@@ -11744,6 +11750,12 @@ var ProviderEditProfileComponent = (function () {
     };
     return ProviderEditProfileComponent;
 }());
+__decorate([
+    core_1.HostListener('window:beforeunload', ['$event']),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], ProviderEditProfileComponent.prototype, "doSomething", null);
 ProviderEditProfileComponent = __decorate([
     core_1.Component({
         selector: 'providereditprofile',
@@ -11819,6 +11831,12 @@ var ProviderJobDetailsComponent = (function () {
             }
         });
     }
+    // To show warning message if Browser Reload button clicked
+    ProviderJobDetailsComponent.prototype.doSomething = function ($event) {
+        if (true) {
+            $event.returnValue = 'You are about to Exit web site';
+        }
+    };
     ProviderJobDetailsComponent.prototype.acceptOffer = function () {
         var _this = this;
         event.stopPropagation();
@@ -11881,6 +11899,12 @@ var ProviderJobDetailsComponent = (function () {
     };
     return ProviderJobDetailsComponent;
 }());
+__decorate([
+    core_1.HostListener('window:beforeunload', ['$event']),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], ProviderJobDetailsComponent.prototype, "doSomething", null);
 ProviderJobDetailsComponent = __decorate([
     core_1.Component({
         selector: 'providerjobdetails',
@@ -11947,6 +11971,12 @@ var ProviderProfileComponent = (function () {
             }
         });
     }
+    // To show warning message if Browser Reload button clicked
+    ProviderProfileComponent.prototype.doSomething = function ($event) {
+        if (true) {
+            $event.returnValue = 'You are about to Exit web site';
+        }
+    };
     // Zoom into modal window selected image
     ProviderProfileComponent.prototype.setSelectedImage = function () {
         this.selectedImage = this.providerProfile.profileImageUrl;
@@ -11988,6 +12018,12 @@ var ProviderProfileComponent = (function () {
     };
     return ProviderProfileComponent;
 }());
+__decorate([
+    core_1.HostListener('window:beforeunload', ['$event']),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], ProviderProfileComponent.prototype, "doSomething", null);
 ProviderProfileComponent = __decorate([
     core_1.Component({
         selector: 'providerprofile',
@@ -12117,6 +12153,12 @@ var SearchJobComponent = (function () {
             }
         });
     }
+    // To show warning message if Browser Reload button clicked
+    SearchJobComponent.prototype.doSomething = function ($event) {
+        if (true) {
+            $event.returnValue = 'You are about to Exit web site';
+        }
+    };
     SearchJobComponent.prototype.ngOnInit = function () {
         var _this = this;
         // Populate Search form from the Singleton if it's not empty
@@ -12430,6 +12472,12 @@ var SearchJobComponent = (function () {
     };
     return SearchJobComponent;
 }());
+__decorate([
+    core_1.HostListener('window:beforeunload', ['$event']),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], SearchJobComponent.prototype, "doSomething", null);
 SearchJobComponent = __decorate([
     core_1.Component({
         selector: 'searchjob',
@@ -14665,7 +14713,7 @@ exports = module.exports = __webpack_require__(15)(undefined);
 
 
 // module
-exports.push([module.i, "\r\n\r\n#footer .container {\r\n    padding-bottom: 20px;\r\n}\r\n\r\nagm-map {\r\n    height: 300px;\r\n}\r\n\r\n#thumbimages ul {\r\n    padding: 0;\r\n    margin: 20px auto;\r\n    position: relative;\r\n    float: left;\r\n}\r\n\r\n#thumbimages li {\r\n    display: inline-block;\r\n    position: relative;\r\n}\r\n\r\n\r\n\r\n.tn {\r\n    position: relative;\r\n    margin-left: 10px;\r\n    box-shadow: #999 1px 1px 3px 1px;\r\n    cursor: pointer;\r\n    width: 150px;\r\n    height: 100px;\r\n    background-size: cover;\r\n    background-repeat: no-repeat;\r\n    background-position: center center;\r\n    object-fit: cover;\r\n}\r\n\r\n\r\n.modal-content {\r\n    width: 670px !important;\r\n}\r\n.selectedImage {\r\n    width: 640px;\r\n    position: relative\r\n}\r\n\r\n.caption {\r\n    position: absolute;\r\n    height: 70px;\r\n    width: 100%;\r\n    top: 410;\r\n    left: 0;\r\n    opacity: 0.9;\r\n    background-color: black;\r\n    color: white;\r\n    padding: 5px;\r\n    font-family: verdana;\r\n    font-size: 12px;\r\n}\r\n\r\n\r\np {\r\n    -webkit-margin-before: 5px !important;\r\n    -webkit-margin-after: 5px !important;\r\n}", ""]);
+exports.push([module.i, "\r\n\r\n#footer .container {\r\n    padding-bottom: 20px;\r\n}\r\n\r\nagm-map {\r\n    height: 300px;\r\n}\r\n\r\n#thumbimages ul {\r\n    padding: 0;\r\n    margin: 20px auto;\r\n    position: relative;\r\n    float: left;\r\n}\r\n\r\n#thumbimages li {\r\n    display: inline-block;\r\n    position: relative;\r\n}\r\n\r\n\r\n\r\n.tn {\r\n    position: relative;\r\n    margin-left: 10px;\r\n    box-shadow: #999 1px 1px 3px 1px;\r\n    cursor: pointer;\r\n    width: 150px;\r\n    height: 100px;\r\n    background-size: cover;\r\n    background-repeat: no-repeat;\r\n    background-position: center center;\r\n    object-fit: cover;\r\n}\r\n\r\n\r\n.modal-content {\r\n    position: relative;\r\n    max-width: 150vh;\r\n}\r\n\r\n.modal-body {\r\n    position: relative;\r\n    padding: 15px;\r\n}\r\n\r\n.modal-dialog {\r\n    position: relative;\r\n    display: table; /* This is important */\r\n    overflow-y: auto;\r\n    overflow-x: auto;\r\n    width: auto;\r\n    min-width: 200px;\r\n}\r\n.selectedImage {\r\n    width: 640px;\r\n    position: relative\r\n}\r\n\r\n.caption {\r\n    position: absolute;\r\n    height: 70px;\r\n    width: 100%;\r\n    top: 410;\r\n    left: 0;\r\n    opacity: 0.9;\r\n    background-color: black;\r\n    color: white;\r\n    padding: 5px;\r\n    font-family: verdana;\r\n    font-size: 12px;\r\n}\r\n\r\n\r\np {\r\n    -webkit-margin-before: 5px !important;\r\n    -webkit-margin-after: 5px !important;\r\n}", ""]);
 
 // exports
 
@@ -15048,13 +15096,13 @@ module.exports = "<div class='container-fluid'>\n    <div class='row'>\n        
 /* 135 */
 /***/ (function(module, exports) {
 
-module.exports = "\n<div *ngIf=\"!isAuthorized\">\r\n    <h1>Login to access personal area: </h1>\r\n    <button type=\"button\" class=\"btn btn-primary\" (click)=\"login()\">Login</button>\r\n</div>\n\n<div *ngIf=\"isAuthorized\">\n    <h1>Logout to leave personal area: </h1>\r\n    <button type=\"button\" class=\"btn btn-primary\" (click)=\"logout()\">Logout</button>\n</div>";
+module.exports = "\n<div *ngIf=\"!isAuthorized\">\r\n    <h1>Login to access personal area </h1>\r\n    <button type=\"button\" class=\"btn btn-primary\" (click)=\"login()\">Login</button>\r\n</div>\n\n<div *ngIf=\"isAuthorized\">\n    <h1>Logout to leave personal area </h1>\r\n    <button type=\"button\" class=\"btn btn-primary\" (click)=\"logout()\">Logout</button>\n</div>";
 
 /***/ }),
 /* 136 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class='main-nav'>\r\n    <div class='navbar navbar-inverse'>\r\n        <div class='navbar-header'>\r\n            <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>\r\n                <span class='sr-only'>Toggle navigation</span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n            </button>\r\n            <a class='navbar-brand' [routerLink]=\"['/providerdashboard']\">Let Skills</a>\r\n        </div>\r\n        <div class='clearfix'></div>\r\n        <div class='navbar-collapse collapse'>\r\n            <ul class='nav navbar-nav'>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/home']\"><span class='glyphicon glyphicon-home'></span>Home</a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/searchjob']\"><span class='glyphicon glyphicon-education'></span>Job Search</a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/providerdashboard']\"><span class='glyphicon glyphicon-education'></span>Dashboard</a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/providerprofile']\"><span class='glyphicon glyphicon-education'></span>My Profile</a>\r\n                </li>\r\n                \r\n                <!--<li>\r\n                    <a href=\"http://localhost:5002/identity\"><span class='glyphicon glyphicon-apple'></span> Identity Ext</a>\r\n                </li>\r\n                <li>\r\n                    <a href=\"http://localhost:5002/maps\"><span class='glyphicon glyphicon-apple'></span> Map Ext</a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a *ngIf=\"!isAuthorized\" (click)=\"login()\"><span class=\"glyphicon glyphicon-user\"></span>Login</a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a *ngIf=\"isAuthorized\" (click)=\"logout()\"><span class='glyphicon glyphicon-log-out'></span>Logout</a>\r\n                </li>-->\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a *ngIf=\"!isAuthorized\" [routerLink]=\"['/home']\"><span class='glyphicon glyphicon-home'></span>Login</a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a *ngIf=\"isAuthorized\" [routerLink]=\"['/home']\"><span class='glyphicon glyphicon-home'></span>Logout</a>\r\n                </li>\r\n\r\n            </ul>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
+module.exports = "<div class='main-nav'>\r\n    <div class='navbar navbar-inverse'>\r\n        <div class='navbar-header'>\r\n            <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>\r\n                <span class='sr-only'>Toggle navigation</span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n            </button>\r\n            <a class='navbar-brand' [routerLink]=\"['/providerdashboard']\">Let Skills</a>\r\n        </div>\r\n        <div class='clearfix'></div>\r\n        <div class='navbar-collapse collapse'>\r\n            <ul class='nav navbar-nav'>\r\n                <!--<li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/home']\"><span class='glyphicon glyphicon-home'></span>Home</a>\r\n                </li>-->\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/searchjob']\"><span class='glyphicon glyphicon-education'></span>Job Search</a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/providerdashboard']\"><span class='glyphicon glyphicon-education'></span>Dashboard</a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/providerprofile']\"><span class='glyphicon glyphicon-education'></span>My Profile</a>\r\n                </li>\r\n                \r\n                <!--<li>\r\n                    <a href=\"http://localhost:5002/identity\"><span class='glyphicon glyphicon-apple'></span> Identity Ext</a>\r\n                </li>\r\n                <li>\r\n                    <a href=\"http://localhost:5002/maps\"><span class='glyphicon glyphicon-apple'></span> Map Ext</a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a *ngIf=\"!isAuthorized\" (click)=\"login()\"><span class=\"glyphicon glyphicon-user\"></span>Login</a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a *ngIf=\"isAuthorized\" (click)=\"logout()\"><span class='glyphicon glyphicon-log-out'></span>Logout</a>\r\n                </li>-->\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a *ngIf=\"!isAuthorized\" [routerLink]=\"['/home']\"><span class='glyphicon glyphicon-home'></span>Login</a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a *ngIf=\"isAuthorized\" [routerLink]=\"['/home']\"><span class='glyphicon glyphicon-home'></span>Logout</a>\r\n                </li>\r\n\r\n            </ul>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
 
 /***/ }),
 /* 137 */
@@ -15072,7 +15120,7 @@ module.exports = "<h1>Edit My Profile</h1>\r\n\r\n<div class=\"container-fluid\"
 /* 139 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Job Details</h1>\r\n\r\n<div class=\"form-group\">\r\n    <div class=\"container\" id=\"thumbimages\">\r\n        <ul>\r\n            <li *ngFor=\"let image of jobDetails?.images\">\r\n                <img src=\"{{image}}\"\r\n                     class=\"tn\"\r\n                     data-toggle=\"modal\"\r\n                     data-target=\"#selectedImageModal2\"\r\n                     (click)=setSelectedImage(image)>\r\n            </li>\r\n        </ul>\r\n\r\n        <div class=\"modal fade\" id=\"selectedImageModal2\">\r\n            <div class=\"modal-dialog\" role=\"document\">\r\n                <div class=\"modal-content\">\r\n                    <div class=\"modal-body\">\r\n                        <img *ngIf=\"selectedImage\" src=\"{{selectedImage}}\">\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<div class=\"mt-2 col-md-12 row\">\r\n\r\n    <table class=\"table table-sm table-striped\">\r\n        <colgroup>\r\n            <col class=\"col-md-2\">\r\n            <col class=\"col-md-5\">\r\n        </colgroup>\r\n        <tbody>\r\n            <tr> <th>Job State: </th> <td>{{ stateIdToName(jobDetails?.jobState) }}</td> </tr>\r\n            <!--<tr> <th>ID:</th> <td>{{ jobDetails?.id || 'Loading Data...' }}</td> </tr>-->\r\n            <tr> <th>Job Title: </th> <td>{{ jobDetails?.jobTitle }}</td> </tr>\r\n            <tr> <th>Description: </th> <td>{{ jobDetails?.jobDescription }}</td> </tr>\r\n            <tr *ngIf=\"jobDetails?.ratePerHour;\"> <th>Rate GBP (Per Hour): </th> <td>{{ jobDetails?.ratePerHour }}</td> </tr>\r\n            <tr *ngIf=\"jobDetails?.rateFixed;\"> <th>Rate GBP (Fixed): </th> <td>{{ jobDetails?.rateFixed }}</td> </tr>\r\n            <tr *ngIf=\"jobDetails?.durationDays;\"> <th>Duration (Days): </th> <td>{{ jobDetails?.durationDays }}</td> </tr>\r\n            <tr *ngIf=\"jobDetails?.durationHours;\"> <th>Duration (Hours): </th> <td>{{ jobDetails?.durationHours }}</td> </tr>\r\n            <!--<tr> <th>PostCode: </th> <td>{{ jobDetails?.locationPostCode }}</td> </tr>-->\r\n            <tr *ngIf=\"jobDetails?.jobState == 40\"> <th>Primary Telephone: </th> <td>{{ jobDetails?.contactTelephone1 }}</td> </tr>\r\n            <tr *ngIf=\"jobDetails?.jobState == 40\"> <th>Secondary Telephone: </th> <td>{{ jobDetails?.contactTelephone2 }}</td> </tr>\r\n            <!--<tr> <th>Email: </th> <td>{{ jobDetails?.contactEmail }}</td> </tr>-->\r\n            <tr> <th>Required Skill: </th> <td>{{ jobDetails?.skill }}</td> </tr>\r\n            <tr> <th>Planned Start Date: </th> <td>{{ jobDetails?.plannedStartDate | date: 'dd-MMM-yyyy' }}</td> </tr>\r\n            <tr> <th>Planned Finish Date: </th> <td>{{ jobDetails?.plannedFinishDate | date: 'dd-MMM-yyyy' }}</td> </tr>\r\n            <!--<tr> <th>Location Latitude: </th> <td>{{ jobDetails?.locationLat }}</td> </tr>-->\r\n            <!--<tr> <th>Location Longitude: </th> <td>{{ jobDetails?.locationLng }}</td> </tr>-->\r\n            </tbody>\r\n    </table>\r\n</div>\r\n\r\n<!-- this creates a google map on the page with the given lat/lng from -->\r\n<!-- the component as the initial center of the map: -->\r\n<div class=\"mt-2 col-md-12 row\">\r\n    <p> Job location: </p>\r\n    <agm-map [latitude]=\"locationLat\"\r\n             [longitude]=\"locationLng\"\r\n             [mapDraggable]=\"false\"\r\n             [scrollwheel]=\"false\"\r\n             [zoom]=\"zoom\">\r\n\r\n        <agm-marker [latitude]=\"locationLat\"\r\n                    [longitude]=\"locationLng\">\r\n\r\n        </agm-marker>\r\n    </agm-map>\r\n</div>\r\n\r\n<div class=\"form-group\">\r\n    <div class=\"mt-2 col-md-12 row\"> \r\n        <div *ngIf=\"jobDetails?.jobState == 20\" class=\"text-center\">\r\n            <p>\r\n                By clicking I Accept, you confirm that you have read the job terms and conditions, that you understand them and that you agree and able to complete this job. Your work quality will be rated.\r\n            </p>\r\n            <button class=\"float-right btn btn-sm btn-success\" (click)=\"acceptOffer()\">I Accept</button>\r\n            <button class=\"float-right btn btn-sm btn-warning\" (click)=\"rejectOffer()\">I cannot Accept</button>\r\n        </div>\r\n\r\n        <!--  Successfull POST response changes status variable value from -1 to 1/0 -->\r\n        <div *ngIf=\"status == 1\" class=\"alert alert-success box-msg text-center\" role=\"alert\">\r\n            <strong>Job Offer is Successfully sent</strong>\r\n        </div>\r\n        <div *ngIf=\"status == 0\" class=\"alert alert-danger box-msg text-center\" role=\"alert\">\r\n            <strong>Job Offer did not happen, try again!</strong>\r\n        </div>\r\n\r\n        <!--  Successfull POST response changes status variable value from -1 to 2/3 -->\r\n        <div *ngIf=\"status == 2\" class=\"alert alert-success box-msg text-center\" role=\"alert\">\r\n            <strong>Job Offer was not accepted</strong>\r\n        </div>\r\n        <div *ngIf=\"status == 3\" class=\"alert alert-danger box-msg text-center\" role=\"alert\">\r\n            <strong>Job Offer rejection did not happen, please try again!</strong>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n\r\n<!-- Vertical space --> \r\n<!--<div class=\"col-xs-12\" style=\"height:20px;\"></div>-->\r\n\r\n<!-- Edit Job Details button --> \r\n<!--<label class=\"control-label\" for=\"singlebutton\"></label>\r\n<div class=\"text-center\">\r\n    <div *ngIf=\"acceptable\">\r\n        <button class=\"float-center btn btn-default btn-primary\" (click)=\"acceptOffer(jobDetails?.id)\">\r\n            Accept this Offer\r\n        </button>\r\n    </div>\r\n\r\n    <div *ngIf=\"unpublishable\">\r\n        <button class=\"float-center btn btn-default btn-primary\" (click)=\"unpublishJob(jobDetails?.id)\">\r\n            Put On Hold\r\n        </button>\r\n        <h5>To Edit this job you have to put it On Hold.</h5>\r\n        <h5>Putting On Hold deletes all current applications.</h5>\r\n        <h5>You will be able to republish this job as a new one.</h5>\r\n    </div>\r\n      Successfull PUT response changes status variable value from -1 to 1 \r\n    <div *ngIf=\"status == 1\" class=\"alert alert-success box-msg text-center\" role=\"alert\">\r\n        <strong>Job is Successfully Put On Hold</strong>\r\n    </div>\r\n    <div *ngIf=\"status == 0\" class=\"alert alert-danger box-msg text-center\" role=\"alert\">\r\n        <strong>Job Update Failed!</strong>\r\n    </div>\r\n</div>-->\r\n\r\n\r\n\r\n<!-- Footer at the bottom of the page to have some contact details etc -->\r\n<div id=\"footer\">\r\n    <footer class=\"container\"></footer>\r\n</div>\r\n";
+module.exports = "<h1>Job Details</h1>\r\n\r\n<div class=\"form-group\">\r\n    <div class=\"container\" id=\"thumbimages\">\r\n        <ul>\r\n            <li *ngFor=\"let image of jobDetails?.images\">\r\n                <img src=\"{{image}}\"\r\n                     class=\"tn\"\r\n                     data-toggle=\"modal\"\r\n                     data-target=\"#selectedImageModal2\"\r\n                     (click)=setSelectedImage(image)>\r\n            </li>\r\n        </ul>\r\n\r\n        <div class=\"modal fade\" id=\"selectedImageModal2\">\r\n            <div class=\"modal-dialog\" role=\"document\">\r\n                <div class=\"modal-content\">\r\n                    <div class=\"modal-body\">\r\n                        <img *ngIf=\"selectedImage\" \r\n                             src=\"{{selectedImage}}\"\r\n                             class=\"img-responsive\"\r\n                             style=\"max-height: 550px;\">\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<div class=\"mt-2 col-md-12 row\">\r\n\r\n    <table class=\"table table-sm table-striped\">\r\n        <colgroup>\r\n            <col class=\"col-md-2\">\r\n            <col class=\"col-md-5\">\r\n        </colgroup>\r\n        <tbody>\r\n            <tr> <th>Job State: </th> <td>{{ stateIdToName(jobDetails?.jobState) }}</td> </tr>\r\n            <!--<tr> <th>ID:</th> <td>{{ jobDetails?.id || 'Loading Data...' }}</td> </tr>-->\r\n            <tr> <th>Job Title: </th> <td>{{ jobDetails?.jobTitle }}</td> </tr>\r\n            <tr> <th>Description: </th> <td>{{ jobDetails?.jobDescription }}</td> </tr>\r\n            <tr *ngIf=\"jobDetails?.ratePerHour;\"> <th>Rate GBP (Per Hour): </th> <td>{{ jobDetails?.ratePerHour }}</td> </tr>\r\n            <tr *ngIf=\"jobDetails?.rateFixed;\"> <th>Rate GBP (Fixed): </th> <td>{{ jobDetails?.rateFixed }}</td> </tr>\r\n            <tr *ngIf=\"jobDetails?.durationDays;\"> <th>Duration (Days): </th> <td>{{ jobDetails?.durationDays }}</td> </tr>\r\n            <tr *ngIf=\"jobDetails?.durationHours;\"> <th>Duration (Hours): </th> <td>{{ jobDetails?.durationHours }}</td> </tr>\r\n            <!--<tr> <th>PostCode: </th> <td>{{ jobDetails?.locationPostCode }}</td> </tr>-->\r\n            <tr *ngIf=\"jobDetails?.jobState == 40\"> <th>Primary Telephone: </th> <td>{{ jobDetails?.contactTelephone1 }}</td> </tr>\r\n            <tr *ngIf=\"jobDetails?.jobState == 40\"> <th>Secondary Telephone: </th> <td>{{ jobDetails?.contactTelephone2 }}</td> </tr>\r\n            <!--<tr> <th>Email: </th> <td>{{ jobDetails?.contactEmail }}</td> </tr>-->\r\n            <tr> <th>Required Skill: </th> <td>{{ jobDetails?.skill }}</td> </tr>\r\n            <tr> <th>Planned Start Date: </th> <td>{{ jobDetails?.plannedStartDate | date: 'dd-MMM-yyyy' }}</td> </tr>\r\n            <tr> <th>Planned Finish Date: </th> <td>{{ jobDetails?.plannedFinishDate | date: 'dd-MMM-yyyy' }}</td> </tr>\r\n            <!--<tr> <th>Location Latitude: </th> <td>{{ jobDetails?.locationLat }}</td> </tr>-->\r\n            <!--<tr> <th>Location Longitude: </th> <td>{{ jobDetails?.locationLng }}</td> </tr>-->\r\n            </tbody>\r\n    </table>\r\n</div>\r\n\r\n<!-- this creates a google map on the page with the given lat/lng from -->\r\n<!-- the component as the initial center of the map: -->\r\n<div class=\"mt-2 col-md-12 row\">\r\n    <p> Job location: </p>\r\n    <agm-map [latitude]=\"locationLat\"\r\n             [longitude]=\"locationLng\"\r\n             [mapDraggable]=\"false\"\r\n             [scrollwheel]=\"false\"\r\n             [zoom]=\"zoom\">\r\n\r\n        <agm-marker [latitude]=\"locationLat\"\r\n                    [longitude]=\"locationLng\">\r\n\r\n        </agm-marker>\r\n    </agm-map>\r\n</div>\r\n\r\n<div class=\"form-group\">\r\n    <div class=\"mt-2 col-md-12 row\"> \r\n        <div *ngIf=\"jobDetails?.jobState == 20\" class=\"text-center\">\r\n            <p>\r\n                By clicking I Accept, you confirm that you have read the job terms and conditions, that you understand them and that you agree and able to complete this job. Your work quality will be rated.\r\n            </p>\r\n            <button class=\"float-right btn btn-sm btn-success\" (click)=\"acceptOffer()\">I Accept</button>\r\n            <button class=\"float-right btn btn-sm btn-warning\" (click)=\"rejectOffer()\">I cannot Accept</button>\r\n        </div>\r\n\r\n        <!--  Successfull POST response changes status variable value from -1 to 1/0 -->\r\n        <div *ngIf=\"status == 1\" class=\"alert alert-success box-msg text-center\" role=\"alert\">\r\n            <strong>Job Offer is Successfully sent</strong>\r\n        </div>\r\n        <div *ngIf=\"status == 0\" class=\"alert alert-danger box-msg text-center\" role=\"alert\">\r\n            <strong>Job Offer did not happen, try again!</strong>\r\n        </div>\r\n\r\n        <!--  Successfull POST response changes status variable value from -1 to 2/3 -->\r\n        <div *ngIf=\"status == 2\" class=\"alert alert-success box-msg text-center\" role=\"alert\">\r\n            <strong>Job Offer was not accepted</strong>\r\n        </div>\r\n        <div *ngIf=\"status == 3\" class=\"alert alert-danger box-msg text-center\" role=\"alert\">\r\n            <strong>Job Offer rejection did not happen, please try again!</strong>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n\r\n<!-- Vertical space --> \r\n<!--<div class=\"col-xs-12\" style=\"height:20px;\"></div>-->\r\n\r\n<!-- Edit Job Details button --> \r\n<!--<label class=\"control-label\" for=\"singlebutton\"></label>\r\n<div class=\"text-center\">\r\n    <div *ngIf=\"acceptable\">\r\n        <button class=\"float-center btn btn-default btn-primary\" (click)=\"acceptOffer(jobDetails?.id)\">\r\n            Accept this Offer\r\n        </button>\r\n    </div>\r\n\r\n    <div *ngIf=\"unpublishable\">\r\n        <button class=\"float-center btn btn-default btn-primary\" (click)=\"unpublishJob(jobDetails?.id)\">\r\n            Put On Hold\r\n        </button>\r\n        <h5>To Edit this job you have to put it On Hold.</h5>\r\n        <h5>Putting On Hold deletes all current applications.</h5>\r\n        <h5>You will be able to republish this job as a new one.</h5>\r\n    </div>\r\n      Successfull PUT response changes status variable value from -1 to 1 \r\n    <div *ngIf=\"status == 1\" class=\"alert alert-success box-msg text-center\" role=\"alert\">\r\n        <strong>Job is Successfully Put On Hold</strong>\r\n    </div>\r\n    <div *ngIf=\"status == 0\" class=\"alert alert-danger box-msg text-center\" role=\"alert\">\r\n        <strong>Job Update Failed!</strong>\r\n    </div>\r\n</div>-->\r\n\r\n\r\n\r\n<!-- Footer at the bottom of the page to have some contact details etc -->\r\n<div id=\"footer\">\r\n    <footer class=\"container\"></footer>\r\n</div>\r\n";
 
 /***/ }),
 /* 140 */
@@ -15096,7 +15144,7 @@ module.exports = "<!-- This is shown in the Modal window from the jobdetails com
 /* 143 */
 /***/ (function(module, exports) {
 
-module.exports = "<h2>\r\n    Login is required to access this area\r\n</h2>\r\n<div>\r\n    <button type=\"button\" class=\"btn btn-primary\" (click)=\"login()\">Login</button>\r\n    <button type=\"button\" class=\"btn btn-default\" (click)=\"goback()\">Home</button>\r\n</div>";
+module.exports = "<h2>\r\n    Login is required to access personal area\r\n</h2>\r\n<div>\r\n    <button type=\"button\" class=\"btn btn-primary\" (click)=\"login()\">Login</button>\r\n    <!--<button type=\"button\" class=\"btn btn-default\" (click)=\"goback()\">Home</button>-->\r\n</div>";
 
 /***/ }),
 /* 144 */

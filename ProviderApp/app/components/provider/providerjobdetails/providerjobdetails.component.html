@@ -16,7 +16,10 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-body">
-                        <img *ngIf="selectedImage" src="{{selectedImage}}">
+                        <img *ngIf="selectedImage" 
+                             src="{{selectedImage}}"
+                             class="img-responsive"
+                             style="max-height: 550px;">
                     </div>
                 </div>
             </div>
