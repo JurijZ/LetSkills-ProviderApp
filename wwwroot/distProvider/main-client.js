@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "ece52c71579abfc8967a"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "149d9af44b69bbd27923"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -11182,8 +11182,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(2);
 var auth_service_1 = __webpack_require__(11);
 var NavMenuComponent = (function () {
-    function NavMenuComponent(authService) {
+    function NavMenuComponent(authService, el, renderer) {
         this.authService = authService;
+        this.el = el;
+        this.renderer = renderer;
     }
     NavMenuComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -11196,6 +11198,12 @@ var NavMenuComponent = (function () {
     };
     NavMenuComponent.prototype.ngOnDestroy = function () {
         this.isAuthorizedSubscription.unsubscribe();
+    };
+    NavMenuComponent.prototype.onMenuClick = function () {
+        //this.el.nativeElement.querySelector('.navbar-ex1-collapse')  get the DOM
+        //this.renderer.setElementClass('DOM-Element', 'css-class-you-want-to-add', false) if 3rd value is true 
+        //it will add the css class. 'in' class is responsible for showing the menu.
+        this.renderer.setElementClass(this.el.nativeElement.querySelector('.navbar-collapse'), 'in', false);
     };
     NavMenuComponent.prototype.login = function () {
         this.authService.login();
@@ -11214,7 +11222,7 @@ NavMenuComponent = __decorate([
         template: __webpack_require__(136),
         styles: [__webpack_require__(428)]
     }),
-    __metadata("design:paramtypes", [auth_service_1.AuthService])
+    __metadata("design:paramtypes", [auth_service_1.AuthService, core_1.ElementRef, core_1.Renderer])
 ], NavMenuComponent);
 exports.NavMenuComponent = NavMenuComponent;
 
@@ -12705,8 +12713,17 @@ var UnauthorizedComponent = (function () {
         this.location = location;
         this.authService = authService;
         this.router = router;
+        this.isAuthorized = false;
     }
     UnauthorizedComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        console.log('Calling ngOnInit method, authorized: ' + this.isAuthorized);
+        this.authService.getIsAuthorized().subscribe(function (isAuthorized) {
+            _this.isAuthorized = isAuthorized;
+        });
+        if (!this.isAuthorized) {
+            this.authService.login();
+        }
     };
     UnauthorizedComponent.prototype.login = function () {
         //this.service.startSigninMainWindow();
@@ -15102,7 +15119,7 @@ module.exports = "\n<div *ngIf=\"!isAuthorized\">\r\n    <h1>Login to access per
 /* 136 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class='main-nav'>\r\n    <div class='navbar navbar-inverse'>\r\n        <div class='navbar-header'>\r\n            <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>\r\n                <span class='sr-only'>Toggle navigation</span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n            </button>\r\n            <a class='navbar-brand' [routerLink]=\"['/providerdashboard']\">Let Skills</a>\r\n        </div>\r\n        <div class='clearfix'></div>\r\n        <div class='navbar-collapse collapse'>\r\n            <ul class='nav navbar-nav'>\r\n                <!--<li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/home']\"><span class='glyphicon glyphicon-home'></span>Home</a>\r\n                </li>-->\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/searchjob']\"><span class='glyphicon glyphicon-education'></span>Job Search</a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/providerdashboard']\"><span class='glyphicon glyphicon-education'></span>Dashboard</a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/providerprofile']\"><span class='glyphicon glyphicon-education'></span>My Profile</a>\r\n                </li>\r\n                \r\n                <!--<li>\r\n                    <a href=\"http://localhost:5002/identity\"><span class='glyphicon glyphicon-apple'></span> Identity Ext</a>\r\n                </li>\r\n                <li>\r\n                    <a href=\"http://localhost:5002/maps\"><span class='glyphicon glyphicon-apple'></span> Map Ext</a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a *ngIf=\"!isAuthorized\" (click)=\"login()\"><span class=\"glyphicon glyphicon-user\"></span>Login</a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a *ngIf=\"isAuthorized\" (click)=\"logout()\"><span class='glyphicon glyphicon-log-out'></span>Logout</a>\r\n                </li>-->\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a *ngIf=\"!isAuthorized\" [routerLink]=\"['/home']\"><span class='glyphicon glyphicon-home'></span>Login</a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a *ngIf=\"isAuthorized\" [routerLink]=\"['/home']\"><span class='glyphicon glyphicon-home'></span>Logout</a>\r\n                </li>\r\n\r\n            </ul>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
+module.exports = "<div class='main-nav'>\r\n    <div class='navbar navbar-inverse'>\r\n        <div class='navbar-header'>\r\n            <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>\r\n                <span class='sr-only'>Toggle navigation</span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n            </button>\r\n            <a class='navbar-brand' [routerLink]=\"['/providerdashboard']\">Let Skills</a>\r\n        </div>\r\n        <div class='clearfix'></div>\r\n        <div class='navbar-collapse collapse'>\r\n            <ul class='nav navbar-nav'>\r\n                <!--<li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/home']\"><span class='glyphicon glyphicon-home'></span>Home</a>\r\n                </li>-->\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/searchjob']\" (click)=\"onMenuClick()\"><span class='glyphicon glyphicon-education'></span>Job Search</a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/providerdashboard']\" (click)=\"onMenuClick()\"><span class='glyphicon glyphicon-education'></span>Dashboard</a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/providerprofile']\" (click)=\"onMenuClick()\"><span class='glyphicon glyphicon-education'></span>My Profile</a>\r\n                </li>\r\n                \r\n                <!--<li>\r\n                    <a href=\"http://localhost:5002/identity\"><span class='glyphicon glyphicon-apple'></span> Identity Ext</a>\r\n                </li>\r\n                <li>\r\n                    <a href=\"http://localhost:5002/maps\"><span class='glyphicon glyphicon-apple'></span> Map Ext</a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a *ngIf=\"!isAuthorized\" (click)=\"login()\"><span class=\"glyphicon glyphicon-user\"></span>Login</a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a *ngIf=\"isAuthorized\" (click)=\"logout()\"><span class='glyphicon glyphicon-log-out'></span>Logout</a>\r\n                </li>-->\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a *ngIf=\"!isAuthorized\" [routerLink]=\"['/home']\" (click)=\"onMenuClick()\"><span class='glyphicon glyphicon-home'></span>Login</a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a *ngIf=\"isAuthorized\" [routerLink]=\"['/home']\" (click)=\"onMenuClick()\"><span class='glyphicon glyphicon-home'></span>Logout</a>\r\n                </li>\r\n\r\n            </ul>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
 
 /***/ }),
 /* 137 */
