@@ -19,11 +19,13 @@ export class UnauthorizedComponent implements OnInit {
     ngOnInit() {
         //console.log('Calling ngOnInit method, authorized: ' + this.isAuthorized);
 
+        // Check if the user authorized
         this.authService.getIsAuthorized().subscribe(
             (isAuthorized: boolean) => {
                 this.isAuthorized = isAuthorized;
             });
 
+        // If user is not authorised rediret to the Identity Server to Login page
         if (!this.isAuthorized) {
             this.authService.login();
         }
