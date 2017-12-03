@@ -16,13 +16,13 @@
                     <a [routerLink]="['/home']"><span class='glyphicon glyphicon-home'></span>Home</a>
                 </li>-->
                 <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/searchjob']"><span class='glyphicon glyphicon-education'></span>Job Search</a>
+                    <a [routerLink]="['/searchjob']" (click)="onMenuClick()"><span class='glyphicon glyphicon-education'></span>Job Search</a>
                 </li>
                 <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/providerdashboard']"><span class='glyphicon glyphicon-education'></span>Dashboard</a>
+                    <a [routerLink]="['/providerdashboard']" (click)="onMenuClick()"><span class='glyphicon glyphicon-education'></span>Dashboard</a>
                 </li>
                 <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/providerprofile']"><span class='glyphicon glyphicon-education'></span>My Profile</a>
+                    <a [routerLink]="['/providerprofile']" (click)="onMenuClick()"><span class='glyphicon glyphicon-education'></span>My Profile</a>
                 </li>
                 
                 <!--<li>
@@ -38,10 +38,10 @@
                     <a *ngIf="isAuthorized" (click)="logout()"><span class='glyphicon glyphicon-log-out'></span>Logout</a>
                 </li>-->
                 <li [routerLinkActive]="['link-active']">
-                    <a *ngIf="!isAuthorized" [routerLink]="['/home']"><span class='glyphicon glyphicon-home'></span>Login</a>
+                    <a *ngIf="!isAuthorized" [routerLink]="['/home']" (click)="onMenuClick()"><span class='glyphicon glyphicon-home'></span>Login</a>
                 </li>
                 <li [routerLinkActive]="['link-active']">
-                    <a *ngIf="isAuthorized" [routerLink]="['/home']"><span class='glyphicon glyphicon-home'></span>Logout</a>
+                    <a *ngIf="isAuthorized" [routerLink]="['/home']" (click)="onMenuClick()"><span class='glyphicon glyphicon-home'></span>Logout</a>
                 </li>
 
             </ul>

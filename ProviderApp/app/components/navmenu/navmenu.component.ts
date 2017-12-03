@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, Renderer } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { Location } from '@angular/common';
 import { AuthService } from '../services/auth.service';
@@ -14,7 +14,7 @@ export class NavMenuComponent implements OnInit, OnDestroy {
     isAuthorizedSubscription: Subscription;
     isAuthorized: boolean;
 
-    constructor(public authService: AuthService) {
+    constructor(public authService: AuthService, private el: ElementRef, private renderer: Renderer) {
     }
 
     ngOnInit() {
@@ -30,6 +30,13 @@ export class NavMenuComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.isAuthorizedSubscription.unsubscribe();
+    }
+
+    onMenuClick() {
+        //this.el.nativeElement.querySelector('.navbar-ex1-collapse')  get the DOM
+        //this.renderer.setElementClass('DOM-Element', 'css-class-you-want-to-add', false) if 3rd value is true 
+        //it will add the css class. 'in' class is responsible for showing the menu.
+        this.renderer.setElementClass(this.el.nativeElement.querySelector('.navbar-collapse'), 'in', false);
     }
 
     public login() {
