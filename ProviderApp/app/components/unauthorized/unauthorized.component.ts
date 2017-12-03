@@ -25,7 +25,7 @@ export class UnauthorizedComponent implements OnInit {
                 this.isAuthorized = isAuthorized;
             });
 
-        // If user is not authorised rediret to the Identity Server to Login page
+        // If user is not authorised rediret to the Identity Servers' Login page
         if (!this.isAuthorized) {
             this.authService.login();
         }

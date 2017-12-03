@@ -4,7 +4,7 @@
         <div class="form-group">
 
             <!-- this creates a Google Map with the given lat/lng -->
-            <div class="col-xs-10">
+            <div class="col-md-10">
                 <label>Zoom into area you wish to search:</label>
 
                 <!--
@@ -52,7 +52,7 @@
 
 
             <!-- Select Required Skill -->
-            <div class="col-xs-2">
+            <div class="col-md-2">
                 <label>I'm skilled in:</label>
                 <select [(ngModel)]="selectedSkill" formControlName="skill" class="skill form-control" (change)="onChangeSkill($event.target.value)">
                     <option *ngFor="let skill of allSkills?.skills" [value]="skill">{{ skill }}</option>
@@ -88,7 +88,7 @@
 </div>
 
 <!-- Vertical space -->
-<div class="col-xs-12" style="height:10px;"></div>
+<div class="col-md-12" style="height:10px;"></div>
 
 <!--  Failed POST response changes status variable value from -1 to 0 -->
 <div class="row" *ngIf="status == 0">    
@@ -99,14 +99,14 @@
 
 <!-- The job of the selected Marker-->
 <div class="row" *ngIf="markedJob">
-    <div class="col-xs-10 form-group">
+    <div class="col-md-10 form-group">
         <div *ngIf="markedJob?.applied == 1" class="alert alert-success box-msg text-center" role="alert">
             <strong>You Applied to this job </strong>
         </div>
         <table class="table table-sm table-striped">
             <colgroup>
-                <col class="col-xs-2">
-                <col class="col-xs-5">
+                <col class="col-md-2">
+                <col class="col-md-5">
             </colgroup>
             <tbody>
                 <tr> <th>Application Status: </th> <td>{{ markedJob?.applied }}</td> </tr>
@@ -149,7 +149,7 @@
 
 <!-- Application Button -->
 <div class="row" *ngIf="markedJob">
-    <div class="col-xs-10">
+    <div class="col-md-10">
         <div *ngIf="!phoneVerified && markedJob?.applied != 1" class="alert alert-warning box-msg text-center" role="alert">
             <strong>To apply Please verify your telephone number</strong>
             <button class="float-center btn btn-sm btn-primary" (click)="navigateToTheProfile()">
@@ -169,14 +169,14 @@
             <strong>Application Failed! Try again later</strong>
         </div>
     </div>
-    <div class="col-xs-2"></div>
+    <div class="col-md-2"></div>
 </div>
 
 
 
 <!-- Footer at the bottom of the page to have some contact details etc -->
 <div id="footer" class="row">
-    <div class="col-xs-12">
+    <div class="col-md-12">
         <footer class="container">Let Skills Limited</footer>
     </div>
 </div>
