@@ -1,6 +1,12 @@
 @{
-    ViewData["Title"] = "Front Page";
+    ViewData["Title"] = "Let Skills";
 }
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.carousel').carousel({ interval: 5000, pause: "false" });
+    });
+</script>
 
 <style>
     .btn-xlarge {
@@ -14,16 +20,25 @@
         background: #ff9900; /**/
     }
 
-    .btn1:hover {
-        background: #3cb0fd;
-        background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-        background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-        background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-        background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-        background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-        text-decoration: none;
-    }    
-    
+        .btn-xlarge:hover {
+            background: #ffAA22; /**/
+        }
+
+    .btn-normal {
+        padding: 8px 14px;
+        font-size: 15px;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        text-align: center;
+        display: inline-block;
+        background: #ff9900; /**/
+    }
+
+        .btn-normal:hover {
+            background: #ffAA22; /**/
+        }
+
     .boxCenterNumber {
         height: 120px;
         width: 200px;
@@ -39,7 +54,7 @@
     }
 
     .title-background {
-        background-color: #1e94d4;
+        background-color: #073281;
     }
 
     .title-colour {
@@ -47,7 +62,7 @@
     }
 
     .footer-background {
-        background-color: #2980b9;
+        background-color: #073281;
     }
 
     .footer-colour {
@@ -64,7 +79,7 @@
     #wrap {
         /*margin-top: 20vh;
         margin-bottom: 20vh;*/
-        padding-top: 20vh;
+        padding-top: 16vh;
         padding-bottom: 20vh;
     }
 
@@ -91,60 +106,210 @@
         display: inline-block;
         float: left;
     }
-    
 
+    .list-group li {
+        border: 0 none;
+    }
+
+    .logo > img, .logo > h2 {
+        display: inline-block;
+    }
+
+    .img-valign {
+        vertical-align: middle;
+        margin-bottom: 1em;
+        margin-left: 1em;
+    }
+
+    /* keeps this behind all content */
+    .carousel {
+        z-index: 0;
+    }
+
+
+    .carousel-fade .carousel-inner .item {
+        opacity: 0;
+        transition-property: opacity;
+    }
+
+    .carousel-fade .carousel-inner .active {
+        opacity: 1;
+    }
+
+        .carousel-fade .carousel-inner .active.left,
+        .carousel-fade .carousel-inner .active.right {
+            left: 0;
+            opacity: 0;
+            z-index: 2;
+        }
+
+    .carousel-fade .carousel-inner .next.left,
+    .carousel-fade .carousel-inner .prev.right {
+        opacity: 1;
+    }
+
+    .carousel-fade .carousel-control {
+        z-index: 1;
+    }
+
+    @@media all and (transform-3d), (-webkit-transform-3d) {
+        .carousel-fade .carousel-inner > .item.next,
+        .carousel-fade .carousel-inner > .item.active.right {
+            opacity: 0;
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+        }
+
+        .carousel-fade .carousel-inner > .item.prev,
+        .carousel-fade .carousel-inner > .item.active.left {
+            opacity: 0;
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+        }
+
+            .carousel-fade .carousel-inner > .item.next.left,
+            .carousel-fade .carousel-inner > .item.prev.right,
+            .carousel-fade .carousel-inner > .item.active {
+                opacity: 1;
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+    }
+
+    .carousel .item {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-transition: opacity 3s;
+        -moz-transition: opacity 3s;
+        -ms-transition: opacity 3s;
+        -o-transition: opacity 3s;
+        transition: opacity 3s;
+    }
+
+    .carousel .one {
+        background: url(dist/frontpage1.jpg);
+        background-position: center center;
+        background-size: cover;
+        -moz-background-size: cover;
+    }
+
+    .carousel .two {
+        background: url(dist/frontpage2.jpg);
+        background-position: center center;
+        background-size: cover;
+        -moz-background-size: cover;
+    }
+
+    .carousel .three {
+        background: url(dist/frontpage3.jpg);
+        background-position: center center;
+        background-size: cover;
+        -moz-background-size: cover;
+    }
+
+    .carousel .four {
+        background: url(dist/frontpage4.jpg);
+        background-position: center center;
+        background-size: cover;
+        -moz-background-size: cover;
+    }
+
+    .carousel .five {
+        background: url(dist/frontpage5.jpg);
+        background-position: center center;
+        background-size: cover;
+        -moz-background-size: cover;
+    }
+
+    .carousel .active.left {
+        left: 0;
+        opacity: 0;
+        z-index: 2;
+    }
+
+    .car1 {
+        background: url(dist/frontpage1.jpg);
+        background-size: cover;
+        background-position: center center;
+        position: relative;
+    }
 </style>
 
-<div class="row">
-    <div class="col-md-10 col-md-offset-1 title-background">
-        <div class="col-md-6 text-left">
-            <h2 class="title-colour">Let Skills</h2>
-        </div>
-        <div class="col-md-6 text-right">
-            <h2>
-                <input type="button"
-                       class="btn btn-warning"
-                       value="Register Today"
-                       onclick="@("window.location.href='http://localhost/identity/Account/Register'");">
-            </h2>
-        </div>
-    </div>
-</div>
+<div>
+    <div id="myCarousel" class="carousel slide carousel-fade">
+        <div class="carousel-inner">
+            <div class="item one"></div>
+            <div class="item two"></div>
+            <div class="item three"></div>
+            <div class="active item four"></div>
+            <div class="item five"></div>
 
-<div >
-    <div class="row" >
-        <div class="col-md-10 col-md-offset-1 text-center">
-            <div class="row">
-                <div class="col-md-2">
-
-                </div>
-                <div class="col-md-8" id="wrap">
-                    <div class="col-md-6 text-center">
-
-                        <input type="button"
-                               class="btn btn-warning btn-xlarge"
-                               value="Advertiser"
-                               onclick="@("window.location.href='" + @Url.Action("Index", "Client") + "'");">
-
-                        <div class="fsize">
-                            Advertise work and find the right person for you.
+            <div style="position:absolute;z-index:3;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.4);"></div>
+            <div class="row" style="position:relative;z-index:4;color:#fff">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-10 text-left logo">
+                            <img class="img-valign" src="dist/ukflag.png" height="42" width="42">
+                            <h2 class="title-colour" style="margin-left:0.5em">Person to Person job board</h2>
                         </div>
-
-                    </div>
-                    <div class="col-md-6 text-center">
-
-                        <input type="button"
-                               class="btn btn-warning btn-xlarge"
-                               value="Job Seeker"
-                               onclick="@("window.location.href='" + @Url.Action("Index", "Provider") + "'");">
-
-                        <div class="fsize">
-                            Search for the jobs and share your skills with people.
+                        <div class="col-md-2 text-center">
+                            <h2>
+                                <input type="button"
+                                       class="btn btn-warning btn-normal"
+                                       value="Register Today"
+                                       onclick="@("window.location.href='http://localhost:5000/Account/Register'");">
+                            </h2>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2">
+            </div>
+            <div class="row" style="position:relative;z-index:4;color:#fff">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-10 text-left">
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <p style="color:white">it's completely free</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="position:relative;z-index:4;color:#fff">
+                <div class="col-md-12 text-center">
+                    <div class="row">
+                        <div class="col-md-2">
 
+                        </div>
+                        <div class="col-md-8" id="wrap">
+                            <div class="col-md-6 text-center">
+
+                                <input type="button"
+                                       class="btn btn-warning btn-xlarge"
+                                       value="Advertiser"
+                                       onclick="@("window.location.href='" + @Url.Action("Index", "Client") + "'");">
+
+                                <div class="fsize" style="margin-top:1em">
+                                    Advertise a job and find the right person for you.
+                                </div>
+
+                            </div>
+                            <div class="col-md-6 text-center">
+
+                                <input type="button"
+                                       class="btn btn-warning btn-xlarge"
+                                       value="Job Seeker"
+                                       onclick="@("window.location.href='" + @Url.Action("Index", "Provider") + "'");">
+
+                                <div class="fsize" style="margin-top:1em">
+                                    Search for the jobs and share your skills with people.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -152,14 +317,14 @@
 </div>
 
 <div class="row">
-    <div class="col-md-10 col-md-offset-1 text-center" style="background-color: #eee;">
-        <h4>How it works?:</h4>
+    <div class="col-md-10 col-md-offset-1 text-center" style="background-color: #fff;">
+        <h4 style="margin-top:2em">How it works?</h4>
     </div>
-    <div class="col-md-10 col-md-offset-1" style="background-color: #eee;">
+    <div class="col-md-10 col-md-offset-1" style="background-color: #fff;">
         <div class="col-md-1"></div>
         <div class="col-md-2 text-center">
             <h4 class="howitworks">Post a job</h4>
-            Deifine a skill you need, location, time and how much you are willing to pay.
+            Deifine a skill you search, location and when you need it.
         </div>
         <div class="col-md-2 text-center">
             <h4 class="howitworks">Apply</h4>
@@ -167,7 +332,7 @@
         </div>
         <div class="col-md-2 text-center">
             <h4 class="howitworks">Offer</h4>
-            Choose the best applicant for your work and make an offer.
+            Choose the best applicant for the job and make an offer.
         </div>
         <div class="col-md-2 text-center">
             <h4 class="howitworks">Work</h4>
@@ -181,9 +346,15 @@
     </div>
 </div>
 
+<div calss="row" style="margin-top:1em">
+    <div class="col-md-10 col-md-offset-1 text-center">
+        @Html.Partial("SkillList.cshtml")
+    </div>
+</div>
+
 <div calss="row">
-    <div class="col-md-10 col-md-offset-1 text-center footer-background">
-            <h5 class="footer-colour"></h5>
+    <div class="col-md-12">
+        <h4>Let Skills</h4>
     </div>
 </div>
 

@@ -8,4 +8,3 @@ D:\LetSkillsProjects\FrontEnd\ProviderApp\obj\Release\netcoreapp1.1\ProviderApp.
 D:\LetSkillsProjects\FrontEnd\ProviderApp\obj\Release\netcoreapp1.1\ProviderApp.AssemblyInfo.cs
 D:\LetSkillsProjects\FrontEnd\ProviderApp\obj\Release\netcoreapp1.1\ProviderApp.dll
 D:\LetSkillsProjects\FrontEnd\ProviderApp\obj\Release\netcoreapp1.1\ProviderApp.pdb
-D:\LetSkillsProjects\FrontEnd\ProviderApp\obj\Release\netcoreapp1.1\ProviderApp.AssemblyInfoInputs.cache
