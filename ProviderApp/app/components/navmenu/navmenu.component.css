@@ -6,7 +6,7 @@ li .glyphicon {
 li.link-active a,
 li.link-active a:hover,
 li.link-active a:focus {
-    background-color: #4189C7;
+    background-color: #065b78;
     color: white;
 }
 
@@ -18,6 +18,28 @@ li.link-active a:focus {
     right: 0;
     z-index: 1;
 }
+
+.navbar-inverse {
+    background-color: #043e51;
+    border-color: #E7E7E7;
+}
+
+.navbar-inverse .navbar-header > a {
+    color: #DDD;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #DDD;
+}
+
+.navbar-toggle {
+    border-color: #fff;
+}
+
+.navbar-toggle:hover {
+    background-color: #065b78;
+}
+
 
 @media (min-width: 768px) {
     /* On small screens, convert the nav menu to a vertical sidebar */

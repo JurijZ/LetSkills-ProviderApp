@@ -51,6 +51,7 @@ export class SearchJobComponent implements OnInit {
     public ob: any;
     private status = -1;            // Disables Search notification messages
     private applicationstatus = -1; // Disables Application notification messages
+    private anyresults = -1;        // Disables Empty results info message
 
     jobSearch: JobSearch = {};
     markedJob: JobSearchResults;                    // A job selected marker 
@@ -264,6 +265,14 @@ export class SearchJobComponent implements OnInit {
                     this.searchResults.Results = result.json() as JobSearchResults[]; 
 
                     console.log("Cache is populated with results" + this.searchResults.Results);
+
+                    // If there are no results then show the info message
+                    if (this.searchResults.Results.length > 0){
+                        this.anyresults = 1;
+                    }
+                    else {
+                        this.anyresults = 0;
+                    }
 
                     this.status = 1;    // Shows Success message
                     this.applicationstatus = -1;

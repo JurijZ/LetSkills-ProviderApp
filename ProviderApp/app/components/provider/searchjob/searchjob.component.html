@@ -90,9 +90,16 @@
 <!-- Vertical space -->
 <div class="col-md-12" style="height:10px;"></div>
 
+<!--  If no results returned then show a message that nothing is found -->
+<div class="row" *ngIf="anyresults == 0" style="margin-top: 1em;">
+    <div class="alert alert-info box-msg text-center col-md-10" role="alert">
+        <strong>No jobs were found in this area.</strong>
+    </div>
+</div> 
+
 <!--  Failed POST response changes status variable value from -1 to 0 -->
-<div class="row" *ngIf="status == 0">    
-    <div  class="alert alert-danger box-msg text-center" role="alert">
+<div class="row" *ngIf="status == 0" style="margin-top: 1em;">    
+    <div  class="alert alert-danger box-msg text-center col-md-10" role="alert">
         <strong>Ups, Job Search Failed, please try again.</strong>
     </div>
 </div> 

@@ -8,33 +8,33 @@
                 <col class="col-md-5">
             </colgroup>
             <tbody>
-                <!--<tr> <th>ID:</th> <td>{{ providerProfile?.id || 'Loading Data...' }}</td> </tr>-->
+                <tr> <th>ID:</th> <td>{{ providerProfile?.id || 'Loading Data...' }}</td> </tr>
                 <!--<tr> <th>Last login Time: </th> <td>{{ providerProfile?.lastLoginTime | date: 'dd-MMM-yyyy'}}</td> </tr>-->
-                <tr> <th>Name: </th> <td>{{ providerProfile?.name || 'Loading Data...' }}</td> </tr>
+                <tr> <th>Name: </th> <td>{{ providerProfile?.name }}</td> </tr>
                 <tr> <th>Surname: </th> <td>{{ providerProfile?.surname }}</td> </tr>
                 <tr> <th>User Name: </th> <td>{{ providerProfile?.username }}</td> </tr>
                 <tr> <th>Email: </th> <td>{{ providerProfile?.contactEmail }}</td> </tr>
-                <tr *ngIf="providerProfile?.contactTelephone1 == providerProfile?.telephone1Verified;">
+                <tr *ngIf="providerProfile?.contactTelephone1 != null;">
                     <th>Primary Telephone: </th>
                     <td>
                         {{ providerProfile?.contactTelephone1 }}
-                        <button type="button"
+                        <button *ngIf="providerProfile?.contactTelephone1 == providerProfile?.telephone1Verified;"
+                                type="button"
                                 class="btn btn-success btn-xs text-center">
                             Number is verified
                         </button>
-                    </td>
-                </tr>
-                <tr *ngIf="providerProfile?.contactTelephone1 != providerProfile?.telephone1Verified;">
-                    <th>Primary Telephone: </th>
-                    <td>
-                        {{ providerProfile?.contactTelephone1 }}
-                        <button type="button"
+                        <button *ngIf="providerProfile?.contactTelephone1 != providerProfile?.telephone1Verified;"
+                                type="button"
                                 class="btn btn-danger btn-xs text-center"
                                 data-toggle="modal" data-target="#myModal"
                                 (click)="sendVerificationSMS(providerProfile?.contactTelephone1)">
                             Verify this telephone number
                         </button>
                     </td>
+                </tr>
+                <tr *ngIf="providerProfile?.contactTelephone1 == null;">
+                    <th>Primary Telephone: </th>
+                    <td>Please add a valid mobile phone number</td>
                 </tr>
                 <tr> <th>Secondary Telephone: </th> <td>{{ providerProfile?.contactTelephone2 }}</td> </tr>
                 <tr *ngIf="providerProfile?.haveAcar"> <th>Have a Car: </th> <td>Yes</td> </tr>

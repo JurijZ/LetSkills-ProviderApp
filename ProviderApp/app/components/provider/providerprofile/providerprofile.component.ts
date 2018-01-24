@@ -52,6 +52,9 @@ export class ProviderProfileComponent {
             .subscribe(result => {
                 this.providerProfile = result.json() as ProviderProfile;
 
+                console.log("contactTelephone1: " + this.providerProfile.contactTelephone1);
+                console.log("telephone1Verified: " + this.providerProfile.telephone1Verified);
+
                 // Set map coordinates
                 this.locationLat = this.providerProfile.locationLat;
                 this.locationLng = this.providerProfile.locationLng;

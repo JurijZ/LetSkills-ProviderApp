@@ -188,7 +188,7 @@ export class ProviderEditProfileComponent {
 
     // POST the form to WEBAPI
     editProviderProfile(formdata) {
-        console.log("Name from the form: " + formdata.name);
+        console.log("Phone from the form: " + formdata.contactTelephone1);
 
         // Prepare the JSON body message
         this.updatedProviderProfile.name = formdata.name;
